@@ -2,18 +2,18 @@ services:
     client:
         build: ./
         ports:
-            - 3001:3000
+            - 3002:3000
         volumes:
             - ./app:/app/app
             - ./public:/app/public
         environment:
-            DB_URL: mongodb://db/multilevel
+            DB_URL: mongodb://db/crm
     db:
         image: mongo:7.0.5
         ports:
             - 27017:27017
         volumes:
-            - multilevel:/data/db
+            - crm:/data/db
 
 volumes:
-    multilevel:
+    crm:
