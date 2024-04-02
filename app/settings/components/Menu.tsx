@@ -6,19 +6,16 @@ export default function Menu() {
         <menu>
             <div className="flex border-b border-b-red-300">
                 {menu.principal.map((item) => (
-                    <div
+                    <Link
                         key={item.key}
+                        href={item.url}
+                        aria-label={item.ariaLabel}
+                        target={item.target}
+                        rel={item.rel}
                         className="p-6 hover:bg-red-200 cursor-pointer"
                     >
-                        <Link
-                            href={item.url}
-                            aria-label={item.ariaLabel}
-                            target={item.target}
-                            rel={item.rel}
-                        >
-                            {item.page}
-                        </Link>
-                    </div>
+                        {item.page}
+                    </Link>
                 ))}
             </div>
         </menu>
