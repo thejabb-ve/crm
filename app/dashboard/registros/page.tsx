@@ -1,15 +1,14 @@
-import Button from "../../settings/components/Button";
-
-export default function Create() {
+import Button from "@/app/settings/components/Button";
+export default function register() {
     return (
         <main className="bg-white m-3">
-            <h1>CREAR REGISTRO</h1>
+            <h1>REGISTROS</h1>
             <div className="flex">
                 <Button
-                    buttonName="Volver"
-                    ariaLabel="Ver lista de logs"
+                    buttonName="Crear"
+                    ariaLabel="Crear Registro"
                     buttonType="button"
-                    url="/registros"
+                    url="/dashboard/registros/crear"
                     target="_self"
                     rel="tag"
                 />

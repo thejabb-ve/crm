@@ -1,4 +1,4 @@
-import Button from "../settings/components/Button";
+import Button from "@/app/settings/components/Button";
 
 export default function Candidates() {
     return (
@@ -10,7 +10,7 @@ export default function Candidates() {
                     buttonName="Crear"
                     ariaLabel="Crear Candidato"
                     buttonType="button"
-                    url="/candidatos/crear"
+                    url="/dashboard/candidatos/crear"
                     target="_self"
                     rel="tag"
                 />
@@ -18,7 +18,7 @@ export default function Candidates() {
                     buttonName="Perfil"
                     ariaLabel="Perfil del Candidato"
                     buttonType="button"
-                    url="/candidatos/perfil"
+                    url="/dashboard/candidatos/perfil"
                     target="_self"
                     rel="tag"
                 />

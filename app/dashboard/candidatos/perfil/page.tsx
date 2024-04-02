@@ -1,15 +1,15 @@
-import Button from "../../settings/components/Button";
+import Button from "@/app/settings/components/Button";
 
-export default function Create() {
+export default function Profile() {
     return (
         <main className="bg-white m-3">
-            <h1>CREAR CANDIDATO</h1>
+            <h1>PERFIL DE CANDIDATO</h1>
             <div className="flex">
                 <Button
                     buttonName="Volver"
                     ariaLabel="Ver lista de Candidatos"
                     buttonType="button"
-                    url="/candidatos"
+                    url="/dashboard/candidatos"
                     target="_self"
                     rel="tag"
                 />

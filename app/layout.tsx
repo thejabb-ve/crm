@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Menu from "./settings/components/Menu";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,12 +13,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="es">
-            <body className="bg-white">
-                <header>
-                    <Menu />
-                </header>
-                {children}
-            </body>
+            <body className="bg-white">{children}</body>
         </html>
     );
 }

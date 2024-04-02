@@ -2,7 +2,7 @@ const principal: menu.principal[] = [
     {
         key: "home",
         page: "Home",
-        url: "/",
+        url: "/dashboard",
         target: "_self",
         ariaLabel: "Ir a la página principal",
         rel: "tag",
@@ -10,7 +10,7 @@ const principal: menu.principal[] = [
     {
         key: "candidates",
         page: "Candidatos",
-        url: "/candidatos",
+        url: "/dashboard/candidatos",
         target: "_self",
         ariaLabel: "Ir a la página de candidatos",
         rel: "tag",
@@ -26,9 +26,17 @@ const principal: menu.principal[] = [
     {
         key: "register",
         page: "Registros",
-        url: "/registros",
+        url: "/dashboard/registros",
         target: "_self",
         ariaLabel: "Ir a la página de registros",
+        rel: "tag",
+    },
+    {
+        key: "logout",
+        page: "Cerrar Sesión",
+        url: "/",
+        target: "_self",
+        ariaLabel: "Cerrar Sesión",
         rel: "tag",
     },
 ];

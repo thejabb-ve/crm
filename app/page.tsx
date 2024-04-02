@@ -1,7 +1,14 @@
+import Button from "@/app/settings/components/Button";
+
 export default function Home() {
     return (
-        <main className="bg-white m-3">
-            <h1>HOME</h1>
-        </main>
+        <Button
+            buttonName="LOGIN"
+            ariaLabel="login"
+            buttonType="button"
+            url="/dashboard"
+            target="_self"
+            rel="tag"
+        />
     );
 }
