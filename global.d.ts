@@ -1,44 +1,46 @@
+/// <reference types="jabb-astro-components/global.d.ts"/>
+
 export {};
 
 declare global {
-    declare module basic {
-        type RelationLink =
-            | "nofollow"
-            | "external"
-            | "next"
-            | "prev"
-            | "tag"
-            | "alternate";
+  namespace Configuration {
+    type CompanyInformation = {
+      readonly commercialName: string;
+      readonly web: string[];
+      readonly legalName: string;
+      readonly id: string;
+      readonly address: string;
+      readonly email: string;
+      readonly motive: string;
+    };
 
-        type ImgFormat = "jpeg" | "jpg" | "png" | "svg" | "webp";
+    type Metadata = {
+      readonly name: string;
+      readonly keywords: string;
+      readonly icon: string;
+    };
 
-        type TargetPage = "_blank" | "_self";
-
-        type ButtonType = "button" | "submit" | "reset";
-
-        type keyType = string | number;
+    type Social = {
+      readonly ig: string;
+      readonly wa: string;
+      readonly yt: string;
+      readonly tw: string;
+      readonly in: string;
+      readonly fb: string;
+    };
+    interface socialIcons {
+      Icon: any;
+      url: string;
+      ariaLabel: string;
     }
 
-    declare module menu {
-        type principal = {
-            key: basic.keyType;
-            page: string;
-            url: string;
-            target: basic.TargetPage;
-            ariaLabel: string;
-            rel: basic.RelationLink;
-        };
-    }
+    type Rss = {
+      rss: number;
+      Icon: any;
+      url: string;
+      ariaLabel: string;
+    };
 
-    declare module button {
-        type basic = {
-            buttonName: string;
-            ariaLabel: string;
-            buttonType: basic.ButtonType;
-            url?: string;
-            target?: basic.TargetPage;
-            rel?: basic.RelationLink;
-            addClass?: string;
-        };
-    }
+    type ogType = 'website' | 'article' | 'book' | 'profile' | 'video.other';
+  }
 }

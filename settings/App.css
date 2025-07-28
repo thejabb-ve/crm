@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .primaryColor {
+    @apply text-blue-800;
+  }
+
+  .primaryColor-hover {
+    @apply hover:text-blue-700;
+  }
+
+  .primaryColor-active {
+    @apply active:text-blue-900;
+  }
+
+  .primaryColor-visited {
+    @apply visited:text-blue-900;
+  }
+
+  .borderColor {
+    @apply border-blue-800;
+  }
+
+  .borderColor-hover {
+    @apply hover:border-blue-700;
+  }
+
+  .borderColor-active {
+    @apply active:border-blue-900;
+  }
+
+  .borderColor-visited {
+    @apply visited:border-blue-900;
+  }
+
+  .background {
+    @apply bg-blue-800;
+  }
+
+  .background-hover {
+    @apply hover:bg-blue-900;
+  }
+
+  .background-active {
+    @apply active:bg-blue-950;
+  }
+
+  .footer-hover {
+    @apply my-2 hover:text-white;
+  }
+}
+
+@layer components {
+  .button {
+    @apply background background-hover background-active rounded px-4 py-2 text-base text-slate-50 shadow transition-all;
+  }
+
+  .footer {
+    @apply text-center text-gray-700;
+  }
+
+  .articleImg {
+    @apply m-auto my-8 rounded shadow;
+  }
+
+  .link {
+    @apply primaryColor borderColor borderColor-hover borderColor-active borderColor-visited primaryColor-hover primaryColor-active primaryColor-visited border-b font-semibold transition-colors;
+  }
+
+  .paragraph {
+    @apply mb-5 mt-3 leading-7 text-gray-800;
+  }
+
+  .policyTable {
+    @apply border-2 p-3;
+  }
+
+  .input {
+    @apply my-1 rounded-lg border-2 border-slate-300 px-2 py-1 text-base text-slate-700;
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply primaryColor font-bold;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply text-base;
+  }
+
+  body {
+    @apply font-sans;
+  }
+
+  #mainContainer {
+    @apply container m-auto w-11/12 py-7 align-middle md:w-10/12;
+  }
+
+  #footerContainer {
+    @apply border-t border-gray-800 bg-white text-xs font-light;
+  }
+
+  #footerLegalContainer {
+    @apply bg-slate-900 py-5 text-center text-slate-200;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* ScrollBar */
+::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 0.75rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.75rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.75rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

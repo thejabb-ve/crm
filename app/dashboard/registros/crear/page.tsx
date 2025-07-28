@@ -1,19 +1,17 @@
-import Button from "@/app/settings/components/Button";
+'use client';
+import { Button } from 'jabb-astro-components';
 
 export default function Create() {
-    return (
-        <main className="bg-white m-3">
-            <h1>CREAR REGISTRO</h1>
-            <div className="flex">
-                <Button
-                    buttonName="Volver"
-                    ariaLabel="Ver lista de logs"
-                    buttonType="button"
-                    url="/dashboard/registros"
-                    target="_self"
-                    rel="tag"
-                />
-            </div>
-        </main>
-    );
+  return (
+    <main className="m-3 bg-white">
+      <h1>CREAR REGISTRO</h1>
+      <div className="flex">
+        <Button.Button1
+          name="Volver"
+          ariaLabel="Ver lista de logs"
+          href="/dashboard/registros"
+        />
+      </div>
+    </main>
+  );
 }
