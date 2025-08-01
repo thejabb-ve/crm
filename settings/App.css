@@ -4,47 +4,47 @@
 
 @layer utilities {
   .primaryColor {
-    @apply text-blue-800;
+    @apply text-gray-800;
   }
 
   .primaryColor-hover {
-    @apply hover:text-blue-700;
+    @apply hover:text-gray-700;
   }
 
   .primaryColor-active {
-    @apply active:text-blue-900;
+    @apply active:text-gray-900;
   }
 
   .primaryColor-visited {
-    @apply visited:text-blue-900;
+    @apply visited:text-gray-900;
   }
 
   .borderColor {
-    @apply border-blue-800;
+    @apply border-gray-800;
   }
 
   .borderColor-hover {
-    @apply hover:border-blue-700;
+    @apply hover:border-gray-700;
   }
 
   .borderColor-active {
-    @apply active:border-blue-900;
+    @apply active:border-gray-900;
   }
 
   .borderColor-visited {
-    @apply visited:border-blue-900;
+    @apply visited:border-gray-900;
   }
 
   .background {
-    @apply bg-blue-800;
+    @apply bg-gray-800;
   }
 
   .background-hover {
-    @apply hover:bg-blue-900;
+    @apply hover:bg-gray-900;
   }
 
   .background-active {
-    @apply active:bg-blue-950;
+    @apply active:bg-gray-950;
   }
 
   .footer-hover {
@@ -79,6 +79,14 @@
 
   .input {
     @apply my-1 rounded-lg border-2 border-slate-300 px-2 py-1 text-base text-slate-700;
+  }
+
+  .tableElement {
+    @apply h-[80px] w-screen select-none border-b px-3;
+  }
+
+  .socialIcon {
+    @apply h-4 w-4 text-gray-600 transition-colors hover:text-gray-400;
   }
 }
 

@@ -13,7 +13,7 @@ export const metadata = {
     siteName: jabb.company.commercialName,
     images: [
       {
-        url: 'https://cdn.aprocre.org.ve/images/logo/logo.png',
+        url: 'https://cdn.thejabb.com/logo/normal.png',
         width: 1200,
         height: 630,
         alt: 'Agencia Jabb - Clients',

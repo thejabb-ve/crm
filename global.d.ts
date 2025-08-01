@@ -43,4 +43,45 @@ declare global {
 
     type ogType = 'website' | 'article' | 'book' | 'profile' | 'video.other';
   }
+
+  namespace Interface {
+    interface TwoButtonsProps {
+      button1: Button.Button;
+      button2: Button.Button;
+    }
+  }
+
+  namespace Database {
+    interface FamilyBurden {
+      birthday?: string;
+      name?: string;
+      comments: string;
+    }
+
+    interface Candidate {
+      id?: number;
+      name: string;
+      birthday?: string;
+      email?: string;
+      phone: string;
+      instagram?: string;
+      sector_id?: number;
+      estimated_salary?: number;
+      estimated_expenses?: number;
+      currency?: number;
+      family_burden?: FamilyBurden[];
+      type: number;
+      status: number;
+      owner_id: number;
+    }
+
+    interface Index {
+      id: number;
+      name: string;
+    }
+
+    interface Status extends Index {
+      config: string;
+    }
+  }
 }

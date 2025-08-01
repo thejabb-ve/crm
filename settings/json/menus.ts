@@ -37,7 +37,7 @@ export const menu: Menu.menu1 = {
   fixed: false,
   menu: [
     {
-      name: 'Inicio',
+      name: 'Dashboard',
       href: '/dashboard',
       ariaLabel: 'Ir a la página principal',
     },
@@ -61,7 +61,6 @@ export const menu: Menu.menu1 = {
     },
     {
       name: 'Cerrar Sesión',
-      href: '#',
       ariaLabel: 'Cerrar Sesión',
     },
   ],

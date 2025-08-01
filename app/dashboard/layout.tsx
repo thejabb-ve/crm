@@ -3,6 +3,7 @@ import { Footers, Menu, Loader } from 'jabb-astro-components';
 import jabb from '../../settings/jabb.config';
 import { legal, menu } from '../../settings/json/menus';
 import Footer2 from '../../settings/footers/Footer2';
+import { logout } from '@/functions/server';
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
 
@@ -15,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="es">
       <body className="darkMode1 md:m-auto">
         <header>
-          <Menu.Menu2 {...menu} />
+          <Menu.Menu2 {...menu} logout={logout} />
           <Menu.Responsive menu={menu.menu} />
         </header>
         <main className="text m-auto my-10 w-11/12">{children}</main>
