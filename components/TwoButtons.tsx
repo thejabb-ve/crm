@@ -11,12 +11,20 @@ export default function TwoButtons({
 
   return (
     <div className="m-auto flex w-full justify-center gap-3 text-center">
-      <Link href={href1 as string} aria-label={Button1.ariaLabel}>
+      {href1 ? (
+        <Link href={href1} aria-label={Button1.ariaLabel}>
+          <Button.Button1 {...Button1} />
+        </Link>
+      ) : (
         <Button.Button1 {...Button1} />
-      </Link>
-      <Link href={href2 as string} aria-label={Button2.ariaLabel}>
+      )}
+      {href2 ? (
+        <Link href={href2} aria-label={Button2.ariaLabel}>
+          <Button.Button1 {...Button2} />
+        </Link>
+      ) : (
         <Button.Button1 {...Button2} />
-      </Link>
+      )}
     </div>
   );
 }
