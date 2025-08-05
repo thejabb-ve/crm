@@ -17,7 +17,7 @@ export const accounts: Database.Candidate[] = [
       },
     ],
     type: 1,
-    status: 2,
+    status: 1,
     owner_id: 1,
     enterprise_id: 1,
   },

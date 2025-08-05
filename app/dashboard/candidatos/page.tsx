@@ -7,18 +7,20 @@ export default async function Page({
 }: {
   searchParams: { query?: string };
 }) {
-  let data: Database.Candidate[] = [];
   const { query } = searchParams;
   const candidateType = type.filter((item) => item.name === 'candidate')[0];
   let candidates: Database.Candidate[];
+  let data: Database.Candidate[] = [];
 
   if (query && query.length > 3) {
-    candidates = accounts.filter(
-      (item) =>
-        item.name.indexOf(query) !== -1 || item.phone.indexOf(query) !== -1,
-    );
+    candidates = accounts
+      .filter((item) => item.type === candidateType.id)
+      .filter(
+        (item) =>
+          item.name.indexOf(query) !== -1 || item.phone.indexOf(query) !== -1,
+      );
 
-    data = candidates;
+    candidates.forEach((item) => data.push(item));
   } else {
     candidates = accounts
       .filter((item) => item.type === candidateType.id)
