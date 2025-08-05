@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Tag from '@/toJabb/Tag';
 import Social from '@/toJabb/Social';
 import Resume from '@/components/Resume';
+import Search from '@/components/Search';
 import { getAge, getOwner } from '@/functions/utils';
 
 const twoButtons: Interface.TwoButtonsProps = {
@@ -39,6 +40,7 @@ export default function Candidates({
 
   return (
     <section>
+      <Search />
       <Table headers={headers}>
         {data.length ? (
           data.map(

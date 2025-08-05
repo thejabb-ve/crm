@@ -3,7 +3,7 @@ import Logs from '@/components/Logs';
 import CandidateStatus from '@/components/Status';
 import CreateAccount from './CreateAccount';
 import { getCandidate, getLogs } from '@/functions/server';
-import { accounts, users, statuses, logs } from '@/settings/json/seed';
+import { accounts, users, enterprise, logs } from '@/settings/json/seed';
 import { getOwner } from '@/functions/utils';
 import TwoButtons from '@/components/TwoButtons';
 
@@ -42,7 +42,7 @@ export default async function Page({
   return (
     <section className="m-3 bg-white">
       <h1>Perfil de {data.name}</h1>
-      <CandidateStatus status={data.status} statuses={statuses} />
+      <CandidateStatus status={data.status} statuses={enterprise.statuses} />
       <div className="grid w-full grid-cols-2 gap-3">
         <div>
           <Profile data={data} owner={createdBy} />

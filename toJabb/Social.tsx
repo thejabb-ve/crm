@@ -1,5 +1,4 @@
 import { IconType } from 'react-icons';
-import { Events } from 'jabb-astro-components';
 import {
   FaInstagram,
   FaWhatsapp,

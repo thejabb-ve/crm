@@ -1,6 +1,6 @@
 'use client';
 import { Inputs, Button } from 'jabb-astro-components';
-import { via } from '@/settings/json/seed';
+import { via } from '@/settings/json/config';
 import { getOwner } from '@/functions/utils';
 
 function getIndex(index: Database.Index[], id: number): string {
@@ -59,40 +59,44 @@ export default function Logs({
       </form>
       <section>
         <h3>Registros Anteriores</h3>
-        {logs.length ? (
-          <div>
-            {logs.map((item) => (
-              <div
-                key={`key-candidate-log-${item.id}`}
-                className="my-1 rounded bg-white p-3 shadow"
-              >
-                <p className="mb-2 rounded bg-gray-100 p-2">{item.message}</p>
-                <div className="grid grid-cols-3 gap-3">
-                  <p className="text-sm">
-                    Vía{' '}
-                    <span className="italic">{getIndex(via, item.via)}</span>
+        <div className="relative h-[300px] w-full">
+          {logs.length ? (
+            <div className="absolute h-[290px] w-full overflow-auto">
+              {logs.map((item) => (
+                <div
+                  key={`key-candidate-log-${item.id}`}
+                  className="my-1 rounded bg-white p-3 shadow"
+                >
+                  <p className="mb-2 rounded bg-gray-100 p-3 font-light leading-6">
+                    {item.message}
                   </p>
-                  <p className="text-sm">
-                    Creado por{' '}
-                    <span className="italic">
-                      {getOwner(users, item.created_by)}
-                    </span>
-                  </p>
-                  {item.next_meeting && (
+                  <div className="grid grid-cols-3 gap-3">
                     <p className="text-sm">
-                      Prox. Reunión{' '}
-                      <span className="italic">{item.next_meeting}</span>
+                      Vía{' '}
+                      <span className="italic">{getIndex(via, item.via)}</span>
                     </p>
-                  )}
+                    <p className="text-sm">
+                      Creado por{' '}
+                      <span className="italic">
+                        {getOwner(users, item.created_by)}
+                      </span>
+                    </p>
+                    {item.next_meeting && (
+                      <p className="text-sm">
+                        Prox. Reunión{' '}
+                        <span className="italic">{item.next_meeting}</span>
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="m-auto text-center font-light">
-            No existen registros, ¡crea el primero!
-          </p>
-        )}
+              ))}
+            </div>
+          ) : (
+            <p className="m-auto text-center font-light">
+              No existen registros, ¡crea el primero!
+            </p>
+          )}
+        </div>
       </section>
     </section>
   );

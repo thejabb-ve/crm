@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function RecentViewed({
   recent,
 }: {
-  recent: Local.recentViewed[];
+  recent: Database.recentViewed[];
 }) {
   function removeRecent(id: Database.id) {
     console.log('removed');

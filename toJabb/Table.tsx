@@ -19,7 +19,7 @@ export default function Table({
           ))}
         </tr>
       </thead>
-      <tbody className="absolute min-h-[305px] w-full divide-y overflow-auto rounded">
+      <tbody className="absolute max-h-[305px] w-full divide-y overflow-y-auto rounded">
         {children}
       </tbody>
     </table>

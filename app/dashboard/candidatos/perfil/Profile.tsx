@@ -1,5 +1,5 @@
 'use client';
-import { Button, Inputs, Events } from 'jabb-astro-components';
+import { Inputs, Events } from 'jabb-astro-components';
 import TwoButtons from '@/components/TwoButtons';
 import Date from '@/toJabb/Date';
 
