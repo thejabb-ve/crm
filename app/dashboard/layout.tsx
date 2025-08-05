@@ -3,6 +3,8 @@ import { Footers, Menu, Loader } from 'jabb-astro-components';
 import jabb from '../../settings/jabb.config';
 import { legal, menu } from '../../settings/json/menus';
 import Footer2 from '../../settings/footers/Footer2';
+import RecentViewed from '@/components/Recent';
+import { recentViewed } from '@/settings/json/seed';
 import { logout } from '@/functions/server';
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
@@ -18,8 +20,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <header>
           <Menu.Menu2 {...menu} logout={logout} />
           <Menu.Responsive menu={menu.menu} />
+          <RecentViewed recent={recentViewed} />
         </header>
-        <main className="text m-auto my-10 w-11/12">{children}</main>
+        <main className="text m-auto mb-10 w-11/12">{children}</main>
         <Footers.Footer1
           companyName={jabb.company.commercialName}
           address={jabb.company.address}

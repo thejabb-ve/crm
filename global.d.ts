@@ -51,7 +51,16 @@ declare global {
     }
   }
 
+  namespace Local {
+    interface recentViewed {
+      id: Database.id;
+      name: string;
+      href: string;
+    }
+  }
+
   namespace Database {
+    type id = number | undefined;
     interface FamilyBurden {
       birthday?: string;
       name?: string;
@@ -59,7 +68,7 @@ declare global {
     }
 
     interface Candidate {
-      id?: number;
+      id: id;
       name: string;
       birthday?: string;
       email?: string;
@@ -68,16 +77,44 @@ declare global {
       sector_id?: number;
       estimated_salary?: number;
       estimated_expenses?: number;
-      currency?: number;
       family_burden?: FamilyBurden[];
       type: number;
       status: number;
-      owner_id: number;
+      owner_id: id;
+    }
+
+    interface Logs {
+      id: id;
+      message: string;
+      via: number;
+      next_meeting?: string;
+      date: string;
+      created_by: id;
+      account_id: id;
+    }
+
+    interface User {
+      id?: id;
+      email: string;
+      password: string;
+      name: string;
+      role: number;
+      tier: number;
+      payment_account?: id;
     }
 
     interface Index {
       id: number;
       name: string;
+    }
+
+    interface Role extends Index {
+      create_logs: boolean;
+      //...
+    }
+
+    interface Tier extends Role {
+      month_limit_logs: number;
     }
 
     interface Status extends Index {

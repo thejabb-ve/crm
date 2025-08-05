@@ -16,11 +16,7 @@ const twoButtons: Interface.TwoButtonsProps = {
   },
 };
 
-enum Phone {
-  ve = '58',
-}
-
-export default function NewClient() {
+export default function NewCandidate() {
   async function submit(formData: FormData) {
     const rawFormData = Events.Utils.rawFormData(formData);
     console.log(rawFormData);
@@ -41,25 +37,14 @@ export default function NewClient() {
         className="input w-full"
       />
 
-      <Inputs.Label htmlFor="phone" name="Número Telefónico" required />
-      <div className=" grid w-full grid-cols-5 gap-2">
-        <Inputs.Select
-          Enum={Phone}
-          name="phoneExt"
-          options={['+58']}
-          required
-          className="input w-full"
-        />
-        <div className="col-span-4 w-full">
-          <Inputs.Text
-            name="phone"
-            required={true}
-            placeholder="4121234567"
-            onChange={() => {}}
-            className="input w-full"
-          />
-        </div>
-      </div>
+      <Inputs.Text
+        name="phone"
+        label={'Número Telefónico'}
+        required={true}
+        placeholder="04121234567"
+        onChange={() => {}}
+        className="input w-full"
+      />
 
       <TwoButtons {...twoButtons} />
     </form>

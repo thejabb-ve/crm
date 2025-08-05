@@ -55,11 +55,6 @@ export const menu: Menu.menu1 = {
     //     rel: "tag",
     // },
     {
-      name: 'Registros',
-      href: '/dashboard/registros',
-      ariaLabel: 'Ir a la página de registros',
-    },
-    {
       name: 'Cerrar Sesión',
       ariaLabel: 'Cerrar Sesión',
     },

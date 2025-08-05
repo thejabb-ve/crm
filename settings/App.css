@@ -88,6 +88,10 @@
   .socialIcon {
     @apply h-4 w-4 text-gray-600 transition-colors hover:text-gray-400;
   }
+
+  .profileContainer {
+    @apply w-full rounded bg-gray-50 p-5 shadow;
+  }
 }
 
 @layer base {
@@ -96,7 +100,9 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  legend,
+  .label {
     @apply primaryColor font-bold;
   }
 
@@ -108,13 +114,15 @@
     @apply text-xl;
   }
 
-  h3 {
+  h3,
+  legend {
     @apply text-lg;
   }
 
   h4,
   h5,
-  h6 {
+  h6,
+  .label {
     @apply text-base;
   }
 
@@ -148,7 +156,8 @@ input[type='number'] {
 
 /* ScrollBar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 0.75rem;
 }
 
@@ -166,5 +175,29 @@ input[type='number'] {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ScrollBar */
+.recentScrollBar::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+  border-radius: 0.75rem;
+}
+
+/* Track */
+.recentScrollBar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.75rem;
+}
+
+/* Handle */
+.recentScrollBar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.75rem;
+}
+
+/* Handle on hover */
+.recentScrollBar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

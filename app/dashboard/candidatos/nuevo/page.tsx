@@ -1,4 +1,4 @@
-import NewClient from './NewClient';
+import NewClient from './NewCandidate';
 
 export default function Create() {
   return (
