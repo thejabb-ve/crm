@@ -3,6 +3,7 @@ import db from './classes/database';
 import Validation from './classes/validation';
 import Cookies from './classes/cookies';
 import { sha256 } from 'crypto-hash';
+import { redirect } from 'next/navigation';
 
 const SECRET = process.env.SECRET as string;
 
@@ -43,7 +44,8 @@ export async function login({
 }
 
 export async function logout() {
-  console.log('work');
+  Cookies.delete(process.env.USER_LOGIN as string);
+  redirect('/login');
 }
 
 export async function createElement() {

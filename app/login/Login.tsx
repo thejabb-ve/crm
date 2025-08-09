@@ -15,7 +15,6 @@ export default function Login() {
       Events.Utils.show('loading', true);
 
       let result: Forms.Response = await login(credentials);
-      // let result = { response: 'login', status: 200 };
 
       setResponse(result);
 

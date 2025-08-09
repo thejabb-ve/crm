@@ -34,4 +34,8 @@ export default class Cookies {
       value,
       ...this.settingCookie,
     });
+
+  public static delete(name: string) {
+    return cookies().delete(name);
+  }
 }
