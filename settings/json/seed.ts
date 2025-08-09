@@ -1,4 +1,4 @@
-export const accounts: Database.Candidate[] = [
+export const accounts: Database.Account[] = [
   {
     id: 1,
     name: 'Pedro Rosales',
@@ -42,7 +42,7 @@ export const accounts: Database.Candidate[] = [
     name: 'Pepe Rosales',
     birthday: '1995-03-05',
     email: 'a@a.com',
-    phone: '+584242916174',
+    phone: '+584242916170',
     instagram: '@thejabb',
     sector_id: 1,
     estimated_salary: 0,
@@ -57,8 +57,10 @@ export const accounts: Database.Candidate[] = [
 
 export const enterprise: Database.Enterprise = {
   id: 1,
+  name: 'The Jabb',
   tier: 4,
   payment_account: 1,
+  user: 1,
   statuses: [
     {
       id: 1,
@@ -112,7 +114,6 @@ export const users: Database.User[] = [
     password: '',
     name: 'Pedro Rosales',
     role: 1,
-    enterprise: 1,
     tags: [],
     created_at: '2025-08-05',
   },
@@ -122,7 +123,6 @@ export const users: Database.User[] = [
     password: '',
     name: 'Alejandro Rosales',
     role: 2,
-    enterprise: 1,
     tags: [],
     created_at: '2025-08-05',
     created_by: 1,
@@ -135,7 +135,6 @@ export const user: Database.User = {
   password: '',
   name: 'Pedro Rosales',
   role: 1,
-  enterprise: 1,
   tags: [],
   created_at: '2025-08-05',
 };

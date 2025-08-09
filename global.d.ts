@@ -85,10 +85,12 @@ declare global {
 
     interface Enterprise {
       id: id;
+      name?: string;
       tier: number;
-      payment_account: id;
+      payment_account?: id;
       statuses: Database.Status[];
       roles: Database.Role[];
+      user: id;
     }
 
     interface Account extends Candidate {}
@@ -103,21 +105,15 @@ declare global {
       account_id: id;
     }
 
-    interface Enterprise {
-      id?: id;
-      tier: number;
-      payment_account?: id;
-    }
-
     interface User {
       id?: id;
       email: string;
-      password: string;
+      password?: string;
       name: string;
       created_at: string;
       created_by?: id;
       role: id;
-      enterprise: number;
+      // enterprise: number;
       tags: string[];
     }
 
@@ -138,5 +134,24 @@ declare global {
     interface Status extends Index {
       config: string;
     }
+  }
+
+  namespace Query {
+    type Response =
+      | Database.User[]
+      | Database.Logs[]
+      | Database.Enterprise[]
+      | Database.Account[]
+      | Database.recentViewed[];
+
+    type Select = (
+      table: string,
+      columns: string,
+      params?: { column: string; value: number | string; exclude?: boolean },
+    ) => Promise<Response>;
+  }
+
+  namespace Cookies {
+    type Data = Database.User;
   }
 }

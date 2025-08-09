@@ -30,9 +30,11 @@ const headers: string[] = [
 export default function Candidates({
   data,
   owners,
+  query,
 }: {
   data: Database.Candidate[];
   owners: Database.User[];
+  query?: string;
 }) {
   const fullDate: Date = new Date();
   const year: number = fullDate.getFullYear();
@@ -40,7 +42,7 @@ export default function Candidates({
 
   return (
     <section>
-      <Search />
+      <Search placeholder="Buscar..." defaultValue={query} />
       <Table headers={headers}>
         {data.length ? (
           data.map(

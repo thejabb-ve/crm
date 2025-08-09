@@ -1,7 +1,7 @@
 'use client';
 import { Form, Events } from 'jabb-astro-components';
 import { useState } from 'react';
-// import { login } from '../../functions/server/session';
+import { login } from '../../functions/server';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
@@ -14,8 +14,8 @@ export default function Login() {
     try {
       Events.Utils.show('loading', true);
 
-      // let result: Forms.Response = await login(credentials);
-      let result = { response: 'login', status: 200 };
+      let result: Forms.Response = await login(credentials);
+      // let result = { response: 'login', status: 200 };
 
       setResponse(result);
 

@@ -1,6 +1,6 @@
 import Candidates from './Candidates';
 import { accounts, users, user } from '@/settings/json/seed';
-import { type } from '@/settings/json/config';
+import { Events } from 'jabb-astro-components';
 
 export default async function Page({
   searchParams,
@@ -8,23 +8,26 @@ export default async function Page({
   searchParams: { query?: string };
 }) {
   const { query } = searchParams;
-  const candidateType = type.filter((item) => item.name === 'candidate')[0];
   let candidates: Database.Candidate[];
   let data: Database.Candidate[] = [];
 
-  if (query && query.length > 3) {
-    candidates = accounts
-      .filter((item) => item.type === candidateType.id)
-      .filter(
-        (item) =>
-          item.name.indexOf(query) !== -1 || item.phone.indexOf(query) !== -1,
-      );
+  if (query) {
+    candidates = accounts.filter(({ type, name, phone }) => {
+      const slugifyName: string = Events.Utils.slugify(name);
+      const slugifyQuery: string = Events.Utils.slugify(query);
 
-    candidates.forEach((item) => data.push(item));
+      return (
+        type === 1 &&
+        (slugifyName.indexOf(slugifyQuery) !== -1 ||
+          phone.indexOf(slugifyQuery) !== -1)
+      );
+    });
+
+    data = candidates;
   } else {
-    candidates = accounts
-      .filter((item) => item.type === candidateType.id)
-      .filter((item) => item.owner_id === user.id);
+    candidates = accounts.filter(
+      ({ type, owner_id }) => type === 1 && owner_id === user.id,
+    );
 
     candidates.forEach((item, index) => {
       if (index <= 10) {
@@ -36,7 +39,7 @@ export default async function Page({
   return (
     <section>
       <h1>Candidatos</h1>
-      <Candidates data={data} owners={users} />
+      <Candidates data={data} owners={users} query={query} />
     </section>
   );
 }
