@@ -1,6 +1,6 @@
 export const accounts: Database.Account[] = [
   {
-    id: 1,
+    id: 'e473c2e6-b278-48f7-83ed-2b09870deed6',
     name: 'Pedro Rosales',
     birthday: '1995-09-05',
     email: 'p@p.com',

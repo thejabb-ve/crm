@@ -26,4 +26,18 @@ export default class Validation {
     if (!password || password.length < 6) return false;
     return true;
   }
+
+  public static newCandidate({
+    name,
+    phone,
+  }: {
+    name: string;
+    phone: string;
+  }): Forms.Response {
+    if (name.length < 4)
+      return { response: 'Ingrese el nombre completo', status: 400 };
+    if (phone.length < 10)
+      return { response: 'Ingrese un número telefónico válido', status: 400 };
+    return { response: '', status: 200 };
+  }
 }

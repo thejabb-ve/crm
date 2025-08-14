@@ -9,7 +9,11 @@ export default class Database {
     return connection;
   }
 
-  public static select: Query.Select = async function (table, columns, params) {
+  public static select: Query.Select = async function (
+    table,
+    columns,
+    params,
+  ): Promise<Query.Response> {
     const db = Database.connection();
     try {
       if (!params) {
@@ -33,4 +37,31 @@ export default class Database {
       return [];
     }
   };
+
+  public static async insert(
+    table: string,
+    array: [] | {},
+    select: boolean,
+  ): Promise<Query.Response> {
+    const connection = Database.connection();
+
+    try {
+      if (!select) {
+        const { error } = await connection.from(table).insert(array);
+
+        if (error) return [];
+        return [];
+      } else {
+        const { data, error } = await connection
+          .from(table)
+          .insert(array)
+          .select();
+
+        if (error) return [];
+        return data as unknown as Query.Response;
+      }
+    } catch {
+      return [];
+    }
+  }
 }

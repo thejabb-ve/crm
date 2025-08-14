@@ -73,17 +73,29 @@ export async function validateSession() {
   }
 }
 
-export async function createElement() {
-  console.log('created');
+export async function createElement(data: {}): Promise<Forms.Response> {
+  try {
+    const element: Query.Response | boolean = await db.insert(
+      'accounts',
+      data,
+      true,
+    );
+    if (!element || (Array.isArray(element) && element.length === 0))
+      return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
+    return {
+      response: element[0].id as string,
+      status: 201,
+    };
+  } catch {
+    return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
+  }
 }
 
 export async function getCandidate(
   data: Database.Candidate[],
   id: Database.id,
 ): Promise<Database.Candidate> {
-  const result: Database.Candidate = data.filter(
-    (item) => item.id === Number(id),
-  )[0];
+  const result: Database.Candidate = data.filter((item) => item.id === id)[0];
 
   return result;
 }
