@@ -52,7 +52,7 @@ declare global {
   }
 
   namespace Database {
-    type id = number | undefined;
+    type id = number | string | undefined;
     interface FamilyBurden {
       birthday?: string;
       name?: string;
@@ -73,7 +73,6 @@ declare global {
       email?: string;
       phone: string;
       instagram?: string;
-      sector_id?: number;
       estimated_salary?: number;
       estimated_expenses?: number;
       family_burden?: FamilyBurden[];
@@ -90,10 +89,12 @@ declare global {
       payment_account?: id;
       statuses: Database.Status[];
       roles: Database.Role[];
-      user: id;
+      // user: id;
     }
 
-    interface Account extends Candidate {}
+    interface Account extends Candidate {
+      sector_id?: number;
+    }
 
     interface Logs {
       id: id;
@@ -105,16 +106,20 @@ declare global {
       account_id: id;
     }
 
-    interface User {
+    interface getOwner {
       id?: id;
+      name: string;
+    }
+
+    interface User extends getOwner {
       email: string;
       password?: string;
-      name: string;
-      created_at: string;
+      created_at?: string;
       created_by?: id;
       role: id;
-      // enterprise: number;
+      active: boolean;
       tags: string[];
+      enterprise_id: id;
     }
 
     interface Index {
@@ -152,6 +157,6 @@ declare global {
   }
 
   namespace Cookies {
-    type Data = Database.User;
+    type Data = Database.User | { owners: Database.getOwner[] };
   }
 }

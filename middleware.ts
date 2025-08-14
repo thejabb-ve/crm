@@ -4,8 +4,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function middleware(request: NextRequest, response: NextResponse) {
-  const cookiesStore = cookies();
-  const session = cookiesStore.has(process.env.USER_LOGIN as string);
+  const session = cookies().has(process.env.USER_LOGIN as string);
   const pathname: string = request.nextUrl.pathname;
 
   if (pathname !== '/login' && !session) {

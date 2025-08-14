@@ -1,13 +1,17 @@
-import Candidates from './Candidates';
-import { accounts, users, user } from '@/settings/json/seed';
 import { Events } from 'jabb-astro-components';
+import Candidates from './Candidates';
+import Cookies from '@/functions/classes/cookies';
+import Get from '@/functions/classes/getter';
+import Database from '@/functions/classes/database';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { query?: string };
-}) {
-  const { query } = searchParams;
+const USER_LOGIN = process.env.USER_LOGIN as string;
+const USERS = process.env.USERS as string;
+
+async function getData(
+  user: Database.User,
+  accounts: Database.Account[],
+  query?: string,
+): Promise<Database.Candidate[]> {
   let candidates: Database.Candidate[];
   let data: Database.Candidate[] = [];
 
@@ -35,6 +39,26 @@ export default async function Page({
       }
     });
   }
+
+  return data;
+}
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { query?: string };
+}) {
+  const { query } = searchParams;
+  const rawUserData = Cookies.read(USER_LOGIN);
+  const user: Database.User = Get.userData(rawUserData as Database.User);
+  const rawUsersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
+  const accounts = (await Database.select('accounts', '*', {
+    column: 'enterprise_id',
+    value: user.enterprise_id as string,
+  })) as Database.Account[];
+
+  const data = await getData(user, accounts, query);
+  const users = rawUsersData.owners;
 
   return (
     <section>

@@ -18,7 +18,7 @@ export const accounts: Database.Account[] = [
     ],
     type: 1,
     status: 1,
-    owner_id: 1,
+    owner_id: '7b1e7038-6bab-4666-876c-02751f71b8a8',
     enterprise_id: 1,
   },
   {
@@ -34,7 +34,7 @@ export const accounts: Database.Account[] = [
     family_burden: [],
     type: 1,
     status: 5,
-    owner_id: 1,
+    owner_id: '7b1e7038-6bab-4666-876c-02751f71b8a8',
     enterprise_id: 1,
   },
   {
@@ -50,7 +50,7 @@ export const accounts: Database.Account[] = [
     family_burden: [],
     type: 1,
     status: 5,
-    owner_id: 1,
+    owner_id: '7b1e7038-6bab-4666-876c-02751f71b8a8',
     enterprise_id: 1,
   },
 ];
@@ -60,7 +60,6 @@ export const enterprise: Database.Enterprise = {
   name: 'The Jabb',
   tier: 4,
   payment_account: 1,
-  user: 1,
   statuses: [
     {
       id: 1,
@@ -109,33 +108,27 @@ export const enterprise: Database.Enterprise = {
 
 export const users: Database.User[] = [
   {
-    id: 1,
+    id: '7b1e7038-6bab-4666-876c-02751f71b8a8',
     email: 'pedro.rosales@thejabb.com',
     password: '',
     name: 'Pedro Rosales',
     role: 1,
     tags: [],
+    active: true,
+    enterprise_id: '3a5594a5-3b89-4036-9459-4b889b0325dc',
     created_at: '2025-08-05',
-  },
-  {
-    id: 2,
-    email: 'info@thejabb.com',
-    password: '',
-    name: 'Alejandro Rosales',
-    role: 2,
-    tags: [],
-    created_at: '2025-08-05',
-    created_by: 1,
   },
 ];
 
 export const user: Database.User = {
-  id: 1,
+  id: '7b1e7038-6bab-4666-876c-02751f71b8a8',
   email: 'pedro.rosales@thejabb.com',
   password: '',
   name: 'Pedro Rosales',
   role: 1,
   tags: [],
+  active: true,
+  enterprise_id: '3a5594a5-3b89-4036-9459-4b889b0325dc',
   created_at: '2025-08-05',
 };
 
@@ -148,7 +141,7 @@ export const logs: Database.Logs[] = [
     next_meeting: '2025-08-10',
     account_id: 1,
     date: '2025-08-05',
-    created_by: 1,
+    created_by: '7b1e7038-6bab-4666-876c-02751f71b8a8',
   },
   {
     id: 2,
@@ -156,7 +149,7 @@ export const logs: Database.Logs[] = [
     via: 2,
     account_id: 2,
     date: '2025-08-05',
-    created_by: 1,
+    created_by: '7b1e7038-6bab-4666-876c-02751f71b8a8',
   },
   {
     id: 3,
@@ -164,7 +157,7 @@ export const logs: Database.Logs[] = [
     via: 3,
     account_id: 1,
     date: '2025-08-05',
-    created_by: 1,
+    created_by: '7b1e7038-6bab-4666-876c-02751f71b8a8',
   },
 ];
 

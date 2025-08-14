@@ -4,7 +4,7 @@ import CandidateStatus from '@/components/Status';
 import CreateAccount from './CreateAccount';
 import { getCandidate, getLogs } from '@/functions/server';
 import { accounts, users, enterprise, logs } from '@/settings/json/seed';
-import { getOwner } from '@/functions/utils';
+import Get from '@/functions/classes/getter';
 import TwoButtons from '@/components/TwoButtons';
 
 const twoButtons: Interface.TwoButtonsProps = {
@@ -37,7 +37,7 @@ export default async function Page({
     );
 
   const candidateLogs: Database.Logs[] = await getLogs(logs, id);
-  const createdBy: string = getOwner(users, data.owner_id);
+  const createdBy: string = Get.filter(users, data.owner_id).name;
 
   return (
     <section className="m-3 bg-white">

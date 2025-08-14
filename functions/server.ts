@@ -2,10 +2,13 @@
 import db from './classes/database';
 import Validation from './classes/validation';
 import Cookies from './classes/cookies';
+import Get from './classes/getter';
 import { sha256 } from 'crypto-hash';
 import { redirect } from 'next/navigation';
 
 const SECRET = process.env.SECRET as string;
+const USER_LOGIN = process.env.USER_LOGIN as string;
+const USERS = process.env.USERS as string;
 
 export async function login({
   username,
@@ -45,7 +48,29 @@ export async function login({
 
 export async function logout() {
   Cookies.delete(process.env.USER_LOGIN as string);
+  Cookies.delete(process.env.USERS as string);
   redirect('/login');
+}
+
+export async function validateSession() {
+  if (!Cookies.has(USER_LOGIN)) return;
+
+  if (Cookies.has(USERS)) return;
+
+  const rawUserData = Cookies.read(USER_LOGIN);
+  const user: Database.User = Get.userData(rawUserData as Database.User);
+  try {
+    const owners = (await db.select('users', 'id, name', {
+      column: 'enterprise_id',
+      value: user.enterprise_id as string,
+    })) as Database.getOwner[];
+
+    const data: string = Cookies.jwt({ owners }, SECRET, 86_400);
+
+    Cookies.set(process.env.USERS as string, data);
+  } catch {
+    return await logout();
+  }
 }
 
 export async function createElement() {

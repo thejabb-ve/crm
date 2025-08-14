@@ -5,7 +5,7 @@ import Tag from '@/toJabb/Tag';
 import Social from '@/toJabb/Social';
 import Resume from '@/components/Resume';
 import Search from '@/components/Search';
-import { getAge, getOwner } from '@/functions/utils';
+import Get from '@/functions/classes/getter';
 
 const twoButtons: Interface.TwoButtonsProps = {
   button1: {
@@ -33,7 +33,7 @@ export default function Candidates({
   query,
 }: {
   data: Database.Candidate[];
-  owners: Database.User[];
+  owners: Database.getOwner[];
   query?: string;
 }) {
   const fullDate: Date = new Date();
@@ -78,8 +78,8 @@ export default function Candidates({
                         ? estimated_salary - estimated_expenses
                         : undefined
                     }
-                    birthday={getAge(year, month, item.birthday)}
-                    owner={getOwner(owners, item.owner_id)}
+                    birthday={Get.age(year, month, item.birthday)}
+                    owner={Get.filter(owners, item.owner_id).name}
                   />
                 </td>
                 <td className="tableElement">

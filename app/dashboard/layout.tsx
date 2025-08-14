@@ -6,6 +6,7 @@ import Footer2 from '../../settings/footers/Footer2';
 import RecentViewed from '@/components/Recent';
 import { recentViewed } from '@/settings/json/seed';
 import { logout } from '@/functions/server';
+import ValidateSession from './Session';
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
 
@@ -18,6 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="es">
       <body className="darkMode1 md:m-auto">
         <header>
+          <ValidateSession />
           <Menu.Menu2 {...menu} logout={logout} />
           <Menu.Responsive menu={menu.menu} />
           <RecentViewed recent={recentViewed} />

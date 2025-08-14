@@ -1,12 +1,7 @@
 'use client';
 import { Inputs, Button } from 'jabb-astro-components';
 import { via } from '@/settings/json/config';
-import { getOwner } from '@/functions/utils';
-
-function getIndex(index: Database.Index[], id: number): string {
-  const result: string = index.filter((item) => item.id === id)[0].name;
-  return result;
-}
+import Get from '@/functions/classes/getter';
 
 export default function Logs({
   logs,
@@ -73,12 +68,14 @@ export default function Logs({
                   <div className="grid grid-cols-3 gap-3">
                     <p className="text-sm">
                       Vía{' '}
-                      <span className="italic">{getIndex(via, item.via)}</span>
+                      <span className="italic">
+                        {Get.filter(via, item.via).name}
+                      </span>
                     </p>
                     <p className="text-sm">
                       Creado por{' '}
                       <span className="italic">
-                        {getOwner(users, item.created_by)}
+                        {Get.filter(users, item.created_by).name}
                       </span>
                     </p>
                     {item.next_meeting && (
