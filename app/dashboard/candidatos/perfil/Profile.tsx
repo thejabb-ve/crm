@@ -99,7 +99,7 @@ export default function Profile({
             name="estimated_salary"
             required={false}
             label={{ text: 'Ingreso Estimado', className: 'label' }}
-            defaultValue={estimated_salary.toString()}
+            defaultValue={estimated_salary ? estimated_salary.toString() : '0'}
             placeholder="0"
             onChange={() => {}}
             className="input w-full"
@@ -108,13 +108,16 @@ export default function Profile({
             name="estimated_expenses"
             required={false}
             label={{ text: 'Gasto Estimado', className: 'label' }}
-            defaultValue={estimated_expenses.toString()}
+            defaultValue={
+              estimated_expenses ? estimated_expenses.toString() : '0'
+            }
             placeholder="0"
             onChange={() => {}}
             className="input w-full"
           />
           <p className="mx-2 my-auto align-middle text-sm">
-            <span className="label">Ahorro Estimado:</span> <span>${0}</span>
+            <span className="label">Ahorro Estimado:</span>{' '}
+            <span>${estimated_salary - estimated_expenses}</span>
           </p>
         </fieldset>
         <TwoButtons {...twoButtons} />

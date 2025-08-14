@@ -139,6 +139,11 @@ declare global {
     interface Status extends Index {
       config: string;
     }
+
+    interface getStatus {
+      id?: string;
+      statuses: Database.Status[];
+    }
   }
 
   namespace Query {
@@ -147,7 +152,8 @@ declare global {
       | Database.Logs[]
       | Database.Enterprise[]
       | Database.Account[]
-      | Database.recentViewed[];
+      | Database.recentViewed[]
+      | Database.getStatus[];
 
     type Select = (
       table: string,
@@ -157,6 +163,9 @@ declare global {
   }
 
   namespace Cookies {
-    type Data = Database.User | { owners: Database.getOwner[] };
+    type Data =
+      | Database.User
+      | { owners: Database.getOwner[] }
+      | { statuses: Database.Status[] };
   }
 }

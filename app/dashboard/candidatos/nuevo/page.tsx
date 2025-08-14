@@ -12,7 +12,7 @@ export default async function Create() {
   return (
     <section className="m-3 bg-white">
       <h1>Crear Nuevo Candidato</h1>
-      <NewClient enterprise_id={enterprise_id} id={id} />
+      <NewClient enterprise_id={enterprise_id as Database.id} id={id} />
     </section>
   );
 }

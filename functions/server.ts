@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 const SECRET = process.env.SECRET as string;
 const USER_LOGIN = process.env.USER_LOGIN as string;
 const USERS = process.env.USERS as string;
+const STATUS = process.env.STATUS as string;
 
 export async function login({
   username,
@@ -55,19 +56,30 @@ export async function logout() {
 export async function validateSession() {
   if (!Cookies.has(USER_LOGIN)) return;
 
-  if (Cookies.has(USERS)) return;
+  if (Cookies.has(USERS) && Cookies.has(STATUS)) return;
 
   const rawUserData = Cookies.read(USER_LOGIN);
   const user: Database.User = Get.userData(rawUserData as Database.User);
+
   try {
     const owners = (await db.select('users', 'id, name', {
       column: 'enterprise_id',
       value: user.enterprise_id as string,
     })) as Database.getOwner[];
 
-    const data: string = Cookies.jwt({ owners }, SECRET, 86_400);
+    const statuses = (
+      await db.select('enterprises', 'statuses', {
+        column: 'id',
+        value: user.enterprise_id as string,
+        exclude: false,
+      })
+    )[0] as Database.getStatus;
 
-    Cookies.set(process.env.USERS as string, data);
+    const ownerCookie: string = Cookies.jwt({ owners }, SECRET, 86_400);
+    const statusCookie: string = Cookies.jwt(statuses, SECRET, 86_400);
+
+    Cookies.set(USERS, ownerCookie);
+    Cookies.set(STATUS, statusCookie);
   } catch {
     return await logout();
   }
@@ -89,24 +101,4 @@ export async function createElement(data: {}): Promise<Forms.Response> {
   } catch {
     return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
   }
-}
-
-export async function getCandidate(
-  data: Database.Candidate[],
-  id: Database.id,
-): Promise<Database.Candidate> {
-  const result: Database.Candidate = data.filter((item) => item.id === id)[0];
-
-  return result;
-}
-
-export async function getLogs(
-  data: Database.Logs[],
-  id: Database.id,
-): Promise<Database.Logs[]> {
-  const result: Database.Logs[] = data.filter(
-    ({ account_id }) => account_id === Number(id),
-  );
-
-  return result;
 }

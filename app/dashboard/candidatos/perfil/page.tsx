@@ -2,10 +2,13 @@ import Profile from './Profile';
 import Logs from '@/components/Logs';
 import CandidateStatus from '@/components/Status';
 import CreateAccount from './CreateAccount';
-import { getCandidate, getLogs } from '@/functions/server';
-import { accounts, users, enterprise, logs } from '@/settings/json/seed';
+import Cookies from '@/functions/classes/cookies';
+import Database from '@/functions/classes/database';
 import Get from '@/functions/classes/getter';
 import TwoButtons from '@/components/TwoButtons';
+
+const STATUS = process.env.STATUS as string;
+const USERS = process.env.USERS as string;
 
 const twoButtons: Interface.TwoButtonsProps = {
   button1: {
@@ -27,7 +30,23 @@ export default async function Page({
 }) {
   const { id } = searchParams;
 
-  const data: Database.Candidate = await getCandidate(accounts, id);
+  const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
+  const statuses: Database.Status[] = rawStatusData.statuses;
+
+  const data = (
+    await Database.select('accounts', '*', {
+      column: 'id',
+      value: id as string,
+      exclude: false,
+    })
+  )[0] as Database.Candidate;
+
+  const logs = (await Database.select('logs', '*', {
+    column: 'account_id',
+    value: id as string,
+    exclude: false,
+  })) as Database.Logs[];
+
   if (!data)
     return (
       <section>
@@ -36,20 +55,21 @@ export default async function Page({
       </section>
     );
 
-  const candidateLogs: Database.Logs[] = await getLogs(logs, id);
-  const createdBy: string = Get.filter(users, data.owner_id).name;
+  const rawOwnersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
+  const owners = rawOwnersData.owners;
+  const createdBy: string = Get.filter(owners, data.owner_id).name;
 
   return (
     <section className="m-3 bg-white">
       <h1>Perfil de {data.name}</h1>
-      <CandidateStatus status={data.status} statuses={enterprise.statuses} />
+      <CandidateStatus status={data.status} statuses={statuses} />
       <div className="grid w-full grid-cols-2 gap-3">
         <div>
           <Profile data={data} owner={createdBy} />
         </div>
         <div>
           <CreateAccount id={id} />
-          <Logs logs={candidateLogs} users={users} />
+          <Logs logs={logs} owners={owners} />
         </div>
       </div>
     </section>

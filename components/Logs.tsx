@@ -5,10 +5,10 @@ import Get from '@/functions/classes/getter';
 
 export default function Logs({
   logs,
-  users,
+  owners,
 }: {
   logs: Database.Logs[];
-  users: Database.User[];
+  owners: Database.getOwner[];
 }) {
   const options: string[] = [];
   via.forEach(({ name }) => options.push(name));
@@ -75,7 +75,7 @@ export default function Logs({
                     <p className="text-sm">
                       Creado por{' '}
                       <span className="italic">
-                        {Get.filter(users, item.created_by).name}
+                        {Get.filter(owners, item.created_by).name}
                       </span>
                     </p>
                     {item.next_meeting && (
