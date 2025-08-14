@@ -16,6 +16,17 @@ interface Social {
   ariaLabel: string;
 }
 
+function validInstagram(ig: string): string {
+  return ig
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-_.]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
 export default function Social({
   id,
   name,
@@ -45,7 +56,7 @@ export default function Social({
     },
     {
       Icon: FaInstagram,
-      href: ig && `https://www.instagram.com/${ig}`,
+      href: ig && `https://www.instagram.com/${validInstagram(ig)}`,
       ariaLabel: `Ir al instagram de ${name}`,
     },
     {

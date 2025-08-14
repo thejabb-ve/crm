@@ -42,7 +42,7 @@ export default function NewCandidate({
     }
 
     try {
-      const { status, response: Response } = await createElement({
+      const { status, response: Response } = await createElement('accounts', {
         enterprise_id,
         owner_id: id,
         ...data,

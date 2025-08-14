@@ -85,10 +85,13 @@ export async function validateSession() {
   }
 }
 
-export async function createElement(data: {}): Promise<Forms.Response> {
+export async function createElement(
+  table: string,
+  data: {},
+): Promise<Forms.Response> {
   try {
     const element: Query.Response | boolean = await db.insert(
-      'accounts',
+      table,
       data,
       true,
     );
@@ -99,6 +102,28 @@ export async function createElement(data: {}): Promise<Forms.Response> {
       status: 201,
     };
   } catch {
+    return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
+  }
+}
+
+export async function updateElement(
+  table: string,
+  data: {},
+  { column, value }: { column: string; value: string },
+): Promise<Forms.Response> {
+  try {
+    const element: Query.Response = await db.update(table, data, {
+      column,
+      value,
+    });
+    if (!element || (Array.isArray(element) && element.length === 0))
+      return {
+        response: 'Ocurrió un error, intente nuevamente',
+        status: 500,
+      };
+    return { response: JSON.stringify(element[0]), status: 201 };
+  } catch (err) {
+    console.log(err);
     return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
   }
 }

@@ -160,6 +160,18 @@ declare global {
       columns: string,
       params?: { column: string; value: number | string; exclude?: boolean },
     ) => Promise<Response>;
+
+    type Insert = (
+      table: string,
+      array: [] | {},
+      select: boolean,
+    ) => Promise<Response>;
+
+    type Update = (
+      table: string,
+      array: {},
+      where: { column: string; value: string | number },
+    ) => Promise<Response>;
   }
 
   namespace Cookies {
