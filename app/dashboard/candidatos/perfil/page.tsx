@@ -1,7 +1,7 @@
 import Profile from './Profile';
 import Logs from '@/components/Logs';
 import CandidateStatus from '@/components/Status';
-import CreateAccount from './CreateAccount';
+// import CreateAccount from './CreateAccount';
 import Cookies from '@/functions/classes/cookies';
 import Database from '@/functions/classes/database';
 import Get from '@/functions/classes/getter';
@@ -68,7 +68,7 @@ export default async function Page({
           <Profile data={data} owner={createdBy} />
         </div>
         <div>
-          <CreateAccount id={id} />
+          {/* <CreateAccount id={id} /> */}
           <Logs logs={logs} owners={owners} />
         </div>
       </div>

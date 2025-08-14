@@ -30,9 +30,11 @@ const headers: string[] = [
 export default function Candidates({
   data,
   owners,
+  statuses,
   query,
 }: {
   data: Database.Candidate[];
+  statuses: Database.Status[];
   owners: Database.getOwner[];
   query?: string;
 }) {
@@ -62,7 +64,11 @@ export default function Candidates({
                   >{`${item.name}`}</Link>
                 </td>
                 <td className="tableElement">
-                  <Tag status={item.status} id={`${item.name}-${index}`} />
+                  <Tag
+                    statuses={statuses}
+                    status={item.status}
+                    id={`${item.name}-${index}`}
+                  />
                 </td>
                 <td className="tableElement">
                   <Resume

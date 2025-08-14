@@ -1,9 +1,16 @@
 import { useMemo } from 'react';
-import { enterprise } from '@/settings/json/seed';
 
-export default function Tag({ id, status }: { id: string; status: number }) {
+export default function Tag({
+  id,
+  status,
+  statuses,
+}: {
+  id: string;
+  status: number;
+  statuses: Database.Status[];
+}) {
   const colors: Database.Status = useMemo(() => {
-    const config: Database.Status[] = enterprise.statuses.filter(
+    const config: Database.Status[] = statuses.filter(
       (item) => item.id === status,
     );
 
