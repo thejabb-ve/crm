@@ -1,11 +1,11 @@
 import TwoButtons from '@/components/TwoButtons';
 import Table from '@/toJabb/Table';
-import Link from 'next/link';
 import Tag from '@/toJabb/Tag';
 import Social from '@/toJabb/Social';
 import Resume from '@/components/Resume';
 import Search from '@/components/Search';
 import Get from '@/functions/classes/getter';
+import AddRecent from './AddRecent';
 
 const twoButtons: Interface.TwoButtonsProps = {
   button1: {
@@ -29,14 +29,18 @@ const headers: string[] = [
 
 export default function Candidates({
   data,
+  userId,
   owners,
   statuses,
   query,
+  recent,
 }: {
   data: Database.Candidate[];
   statuses: Database.Status[];
   owners: Database.getOwner[];
   query?: string;
+  userId: string;
+  recent: Database.Recent[];
 }) {
   const fullDate: Date = new Date();
   const year: number = fullDate.getFullYear();
@@ -57,11 +61,7 @@ export default function Candidates({
                 className="bg-white transition-colors hover:bg-blue-50"
               >
                 <td className="tableElement">
-                  <Link
-                    href={`/dashboard/candidatos/perfil?id=${item.id}`}
-                    aria-label={`Ver perfil de ${item.name}`}
-                    className="border-white hover:border-b hover:border-blue-800 hover:text-blue-800"
-                  >{`${item.name}`}</Link>
+                  <AddRecent id={userId} item={item} recent={recent} />
                 </td>
                 <td className="tableElement">
                   <Tag

@@ -161,17 +161,9 @@ export const logs: Database.Logs[] = [
   },
 ];
 
-export const recentViewed: Database.recentViewed[] = [
+export const recentViewed: Database.Index[] = [
   {
-    id: 1,
     name: 'Pedro Rosales',
-    href: '/dashboard/candidatos/perfil?id=1',
-    user_id: 1,
-  },
-  {
-    id: 2,
-    name: 'Alejandro Rosales',
-    href: '/dashboard/candidatos/perfil?id=2',
-    user_id: 2,
+    id: 'e473c2e6-b278-48f7-83ed-2b09870deed6',
   },
 ];

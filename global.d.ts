@@ -59,13 +59,6 @@ declare global {
       comments: string;
     }
 
-    interface recentViewed {
-      id: id;
-      name: string;
-      href: string;
-      user_id: id;
-    }
-
     interface Candidate {
       id: id;
       name: string;
@@ -120,10 +113,11 @@ declare global {
       active: boolean;
       tags: string[];
       enterprise_id: id;
+      recent_viewed?: Recent[];
     }
 
     interface Index {
-      id: number;
+      id: id;
       name: string;
     }
 
@@ -140,9 +134,17 @@ declare global {
       config: string;
     }
 
+    interface Recent extends Index {
+      type: number;
+    }
+
     interface getStatus {
       id?: string;
-      statuses: Database.Status[];
+      statuses: Status[];
+    }
+
+    interface getRecent {
+      recent_viewed: Recent[];
     }
   }
 
@@ -152,7 +154,6 @@ declare global {
       | Database.Logs[]
       | Database.Enterprise[]
       | Database.Account[]
-      | Database.recentViewed[]
       | Database.getStatus[];
 
     type Select = (
@@ -178,6 +179,7 @@ declare global {
     type Data =
       | Database.User
       | { owners: Database.getOwner[] }
-      | { statuses: Database.Status[] };
+      | { statuses: Database.Status[] }
+      | { recent_viewed: Database.Recent[] };
   }
 }

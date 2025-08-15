@@ -10,6 +10,7 @@ const SECRET = process.env.SECRET as string;
 const USER_LOGIN = process.env.USER_LOGIN as string;
 const USERS = process.env.USERS as string;
 const STATUS = process.env.STATUS as string;
+const RECENT = process.env.RECENT as string;
 
 export async function login({
   username,
@@ -32,14 +33,20 @@ export async function login({
       })
     )[0] as Database.User;
 
-    const { password: userPwd, ...data } = user;
+    const { password: userPwd, recent_viewed, ...data } = user;
 
     if (pwd !== userPwd)
       return { response: 'Usuario o contraseña incorrecta', status: 400 };
 
     const userId: string = Cookies.jwt(data, SECRET, 86_400);
+    const recentViewed: string = Cookies.jwt(
+      { recent_viewed: recent_viewed as Database.Recent[] },
+      SECRET,
+      86_400,
+    );
 
-    Cookies.set(process.env.USER_LOGIN as string, userId);
+    Cookies.set(USER_LOGIN, userId);
+    Cookies.set(RECENT, recentViewed);
 
     return { response: 'Sesión iniciada', status: 200 };
   } catch {
@@ -48,14 +55,15 @@ export async function login({
 }
 
 export async function logout() {
-  Cookies.delete(process.env.USER_LOGIN as string);
-  Cookies.delete(process.env.USERS as string);
+  Cookies.delete(USER_LOGIN);
+  Cookies.delete(USERS);
+  Cookies.delete(STATUS);
+  Cookies.delete(RECENT);
   redirect('/login');
 }
 
 export async function validateSession() {
   if (!Cookies.has(USER_LOGIN)) return;
-
   if (Cookies.has(USERS) && Cookies.has(STATUS)) return;
 
   const rawUserData = Cookies.read(USER_LOGIN);
@@ -109,7 +117,7 @@ export async function createElement(
 export async function updateElement(
   table: string,
   data: {},
-  { column, value }: { column: string; value: string },
+  { column, value }: { column: string; value: string | number },
 ): Promise<Forms.Response> {
   try {
     const element: Query.Response = await db.update(table, data, {
@@ -126,4 +134,10 @@ export async function updateElement(
     console.log(err);
     return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
   }
+}
+
+export async function refreshRecent(query: Cookies.Data) {
+  Cookies.delete(RECENT);
+  const data: string = Cookies.jwt(query, SECRET, 86_400);
+  Cookies.set(RECENT, data);
 }

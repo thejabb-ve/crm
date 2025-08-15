@@ -7,6 +7,7 @@ import Database from '@/functions/classes/database';
 const USER_LOGIN = process.env.USER_LOGIN as string;
 const USERS = process.env.USERS as string;
 const STATUS = process.env.STATUS as string;
+const RECENT = process.env.RECENT as string;
 
 async function getData(
   user: Database.User,
@@ -54,12 +55,14 @@ export default async function Page({
   const rawUserData = Cookies.read(USER_LOGIN);
   const rawUsersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
   const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
+  const rawRecent = Cookies.read(RECENT) as Database.getRecent;
 
   const user: Database.User = Get.userData(rawUserData as Database.User);
   const accounts = (await Database.select('accounts', '*', {
     column: 'enterprise_id',
     value: user.enterprise_id as string,
   })) as Database.Account[];
+  const recent: Database.Recent[] = rawRecent.recent_viewed;
 
   const data = await getData(user, accounts, query);
   const users = rawUsersData.owners;
@@ -71,8 +74,10 @@ export default async function Page({
       <Candidates
         statuses={statuses}
         data={data}
+        userId={user.id as string}
         owners={users}
         query={query}
+        recent={recent}
       />
     </section>
   );

@@ -1,20 +1,30 @@
 import type { Metadata } from 'next';
 import { Footers, Menu, Loader } from 'jabb-astro-components';
+import Cookies from '@/functions/classes/cookies';
 import jabb from '../../settings/jabb.config';
 import { legal, menu } from '../../settings/json/menus';
 import Footer2 from '../../settings/footers/Footer2';
 import RecentViewed from '@/components/Recent';
-import { recentViewed } from '@/settings/json/seed';
+import Get from '@/functions/classes/getter';
 import { logout } from '@/functions/server';
 import ValidateSession from './Session';
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
+
+const RECENT = process.env.RECENT as string;
+const USER = process.env.USER_LOGIN as string;
 
 export const metadata: Metadata = {
   icons: { icon: 'https://cdn.thejabb.com/logo/favicon.png' },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const rawRecent = Cookies.read(RECENT) as Database.getRecent;
+  const rawUser = Cookies.read(USER) as Database.User;
+
+  const recent: Database.Recent[] = rawRecent.recent_viewed;
+  const user: Database.User = Get.userData(rawUser as Database.User);
+
   return (
     <html lang="es">
       <body className="darkMode1 md:m-auto">
@@ -22,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <ValidateSession />
           <Menu.Menu2 {...menu} logout={logout} />
           <Menu.Responsive menu={menu.menu} />
-          <RecentViewed recent={recentViewed} />
+          <RecentViewed recent={recent} user={user} />
         </header>
         <main className="text m-auto mb-10 w-11/12">{children}</main>
         <Footers.Footer1
