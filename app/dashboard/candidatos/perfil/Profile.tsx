@@ -14,7 +14,7 @@ const twoButtons: Interface.TwoButtonsProps = {
   },
   button2: {
     ariaLabel: 'Cancelar cambios de candidato',
-    name: 'Cancelar',
+    name: 'Regresar',
     href: '/dashboard/candidatos',
   },
 };

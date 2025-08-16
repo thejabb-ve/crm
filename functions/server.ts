@@ -130,8 +130,30 @@ export async function updateElement(
         status: 500,
       };
     return { response: JSON.stringify(element[0]), status: 201 };
-  } catch (err) {
-    console.log(err);
+  } catch {
+    return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
+  }
+}
+
+export async function updateStatus(
+  value: string,
+  via: number,
+  status: number,
+  statuses: Database.Status[],
+): Promise<Forms.Response> {
+  if (status <= 0 || status > statuses.length)
+    return { response: 'Estado inválido', status: 400 };
+
+  if (status > 1) return { response: 'Usuario abierto', status: 200 };
+
+  //Use Via in future
+  console.log(via);
+  // ----------------
+
+  try {
+    await db.update('accounts', { status: 2 }, { column: 'id', value });
+    return { response: 'Estado actualizado exitosamente', status: 201 };
+  } catch {
     return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
   }
 }

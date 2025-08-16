@@ -1,3 +1,4 @@
+// import { via } from '@/settings/json/config';
 type data = Database.User | Database.Index | Database.getOwner;
 
 export default class Get {
@@ -24,4 +25,26 @@ export default class Get {
 
     return { id, email, name, created_by, role, tags, active, enterprise_id };
   }
+
+  // public static newStatus(usedVia: number) {
+  //   const { name } = via.filter(
+  //     (item) => item.id === usedVia,
+  //   )[0] as Database.Index;
+  //   let status: 'open' | 'negotiating';
+
+  //   switch (name) {
+  //     case 'Llamada':
+  //     case 'Reunión Online':
+  //     case 'Reunión Presencial':
+  //     case 'Correo Electrónico':
+  //       status = 'negotiating';
+  //       break;
+  //     case 'Presentación Grupal':
+  //     case 'WhatsApp':
+  //       status = 'open';
+  //       break;
+  //     default:
+  //       status = 'open';
+  //   }
+  // }
 }

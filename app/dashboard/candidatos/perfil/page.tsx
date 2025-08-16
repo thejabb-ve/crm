@@ -9,6 +9,7 @@ import TwoButtons from '@/components/TwoButtons';
 
 const STATUS = process.env.STATUS as string;
 const USERS = process.env.USERS as string;
+const USER = process.env.USER_LOGIN as string;
 
 const twoButtons: Interface.TwoButtonsProps = {
   button1: {
@@ -31,7 +32,10 @@ export default async function Page({
   const { id } = searchParams;
 
   const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
+  const rawUserData = Cookies.read(USER) as Database.User;
+
   const statuses: Database.Status[] = rawStatusData.statuses;
+  const user: Database.User = Get.userData(rawUserData as Database.User);
 
   const data = (
     await Database.select('accounts', '*', {
@@ -69,7 +73,14 @@ export default async function Page({
         </div>
         <div>
           {/* <CreateAccount id={id} /> */}
-          <Logs logs={logs} owners={owners} />
+          <Logs
+            created_by={user.id}
+            account_id={id}
+            logs={logs.reverse()}
+            owners={owners}
+            status={data.status}
+            statuses={statuses}
+          />
         </div>
       </div>
     </section>

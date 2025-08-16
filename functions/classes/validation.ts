@@ -40,4 +40,12 @@ export default class Validation {
       return { response: 'Ingrese un número telefónico válido', status: 400 };
     return { response: '', status: 200 };
   }
+
+  public static newLog({ via, message }: Database.Logs): Forms.Response {
+    if (via <= 0)
+      return { response: 'Seleccione un método de contacto', status: 400 };
+    if (message.length < 4)
+      return { response: 'Ingrese un mensaje válido', status: 400 };
+    return { response: '', status: 200 };
+  }
 }

@@ -90,7 +90,7 @@ declare global {
     }
 
     interface Logs {
-      id: id;
+      id?: id;
       message: string;
       via: number;
       next_meeting?: string;

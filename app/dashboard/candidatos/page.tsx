@@ -4,7 +4,7 @@ import Cookies from '@/functions/classes/cookies';
 import Get from '@/functions/classes/getter';
 import Database from '@/functions/classes/database';
 
-const USER_LOGIN = process.env.USER_LOGIN as string;
+const USER = process.env.USER_LOGIN as string;
 const USERS = process.env.USERS as string;
 const STATUS = process.env.STATUS as string;
 const RECENT = process.env.RECENT as string;
@@ -52,7 +52,7 @@ export default async function Page({
 }) {
   const { query } = searchParams;
 
-  const rawUserData = Cookies.read(USER_LOGIN);
+  const rawUserData = Cookies.read(USER);
   const rawUsersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
   const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
   const rawRecent = Cookies.read(RECENT) as Database.getRecent;
