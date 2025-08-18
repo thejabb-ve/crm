@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TwoButtons from '@/components/TwoButtons';
 import { createElement } from '@/functions/server';
 import { Inputs, Events } from 'jabb-astro-components';
@@ -32,8 +32,16 @@ export default function NewCandidate({
     phone: '',
   });
   const [response, setResponse] = useState<Forms.Response | undefined>();
+  const [blocked, setBlocked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!blocked) return;
+    setTimeout(() => setBlocked(false), 5000);
+  }, [blocked]);
 
   async function submit() {
+    if (blocked) return;
+    setBlocked(true);
     Events.Utils.show('loading', true);
     const validate: Forms.Response = Validation.newCandidate(data);
     if (validate.status < 200 || validate.status >= 300) {
@@ -56,7 +64,7 @@ export default function NewCandidate({
 
         setTimeout(() => {
           return router.push(`/dashboard/candidatos/perfil?id=${Response}`);
-        }, 1500);
+        }, 500);
       } else {
         setResponse({ status, response: Response });
         return Events.Utils.show('loading', false);
