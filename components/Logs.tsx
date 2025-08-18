@@ -28,7 +28,7 @@ export default function Logs({
     message: '',
     account_id,
     created_by,
-    date: new Date().toISOString(),
+    date: new Date().toISOString().slice(0, 10),
   });
   const [response, setResponse] = useState<Forms.Response | undefined>();
 
@@ -92,20 +92,37 @@ export default function Logs({
             }
             required={true}
           />
-          <Inputs.Date
-            name="next_meeting"
-            required={false}
-            label={{ className: 'label', text: 'Próxima Reunión' }}
-            className="input w-full"
-            onChange={(e) =>
-              Events.Forms.handleInput(
-                e.target.value,
-                'next_meeting',
-                formData,
-                setFormData,
-              )
-            }
-          />
+          <div>
+            <Inputs.Date
+              name="date"
+              required={true}
+              label={{ className: 'label', text: 'Día de Contacto' }}
+              className="input w-full"
+              defaultValue={formData.date}
+              onChange={(e) =>
+                Events.Forms.handleInput(
+                  e.target.value,
+                  'date',
+                  formData,
+                  setFormData,
+                )
+              }
+            />
+            <Inputs.Date
+              name="next_meeting"
+              required={false}
+              label={{ className: 'label', text: 'Próxima Reunión' }}
+              className="input w-full"
+              onChange={(e) =>
+                Events.Forms.handleInput(
+                  e.target.value,
+                  'next_meeting',
+                  formData,
+                  setFormData,
+                )
+              }
+            />
+          </div>
           <div className="col-span-2">
             <Inputs.TextArea
               name="message"
