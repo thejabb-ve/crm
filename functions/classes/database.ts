@@ -71,6 +71,18 @@ export default class Database {
 
     if (error) return [];
 
-    return data as unknown as Query.Response;
+    return data as Query.Response;
   };
+
+  public static async login(email: string, password: string) {
+    const connection = Database.connection();
+    let { data, error } = await connection.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) return error;
+
+    return data;
+  }
 }
