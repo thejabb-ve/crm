@@ -25,9 +25,6 @@ export async function login({
   const validUser: string = Validation.username(username);
 
   try {
-    const auth = await db.login(username, password);
-    console.log(auth);
-
     const pwd: string = await sha256(password);
     const user = (
       await db.select('users', '*', {

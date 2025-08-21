@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 export default class Database {
-  private static connection() {
+  public static connection() {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 
@@ -74,15 +74,15 @@ export default class Database {
     return data as Query.Response;
   };
 
-  public static async login(email: string, password: string) {
-    const connection = Database.connection();
-    let { data, error } = await connection.auth.signInWithPassword({
-      email,
-      password,
-    });
+  // public static async login(email: string, password: string) {
+  //   const connection = Database.connection();
+  //   let { data, error } = await connection.auth.signInWithPassword({
+  //     email,
+  //     password,
+  //   });
 
-    if (error) return error;
+  //   if (error) return error;
 
-    return data;
-  }
+  //   return data;
+  // }
 }
