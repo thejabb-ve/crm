@@ -3,6 +3,7 @@ import { Form, Events } from 'jabb-astro-components';
 import { useState } from 'react';
 import Database from '@/functions/classes/dbClient';
 import { login } from '../../functions/server';
+import Database from '@/functions/classes/database';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
