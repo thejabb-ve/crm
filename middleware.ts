@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   //   pathname.startsWith(path),
   // );
 
-  if (!user) {
+  if (!user && pathname !== '/login') {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     url.searchParams.set('redirect', pathname);
