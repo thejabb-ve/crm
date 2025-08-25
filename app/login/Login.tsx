@@ -2,6 +2,7 @@
 import { Form, Events } from 'jabb-astro-components';
 import { useState } from 'react';
 import { login } from '../../functions/server';
+// import Database from '@/functions/classes/database';
 import { useRouter } from 'next/navigation';
 
 export default function Login() {
@@ -13,6 +14,10 @@ export default function Login() {
     setResponse(undefined);
     try {
       Events.Utils.show('loading', true);
+      // await Database.login(
+      //   credentials.username as string,
+      //   credentials.password as string,
+      // );
 
       let result: Forms.Response = await login(credentials);
 
