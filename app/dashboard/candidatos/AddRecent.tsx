@@ -23,8 +23,6 @@ export default function AddRecent({
     if (found) {
       return router.push(`/dashboard/candidatos/perfil?id=${item.id}`);
     }
-    const payment = await Database.select('payment_accounts', '*');
-    console.log(payment);
 
     try {
       Events.Utils.show('loading', true);
