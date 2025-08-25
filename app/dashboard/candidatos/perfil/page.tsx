@@ -3,7 +3,7 @@ import Logs from '@/components/Logs';
 import CandidateStatus from '@/components/Status';
 // import CreateAccount from './CreateAccount';
 import Cookies from '@/functions/classes/cookies';
-import Database from '@/functions/classes/database';
+import Database from '@/functions/classes/dbClient';
 import Get from '@/functions/classes/getter';
 import TwoButtons from '@/components/TwoButtons';
 

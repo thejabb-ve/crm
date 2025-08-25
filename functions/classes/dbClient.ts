@@ -1,12 +1,10 @@
-import { createClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export default class Database {
   private static connection() {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-
-    const connection = createClient(supabaseUrl, supabaseAnonKey);
-    return connection;
+    return createBrowserClient(supabaseUrl!, supabaseAnonKey!);
   }
 
   public static select: Query.Select = async function (table, columns, params) {

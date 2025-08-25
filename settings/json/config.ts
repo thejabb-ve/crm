@@ -1,3 +1,5 @@
+export const PROTECTED_ROUTES: string[] = ['/dashboard'];
+
 export const via: Database.Index[] = [
   {
     id: 1,

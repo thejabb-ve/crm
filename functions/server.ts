@@ -1,9 +1,10 @@
 'use server';
-import db from './classes/database';
+import db from './classes/dbClient';
+import { Login, Logout } from './classes/dbServer';
+import type { Session } from '@supabase/supabase-js';
 import Validation from './classes/validation';
 import Cookies from './classes/cookies';
 import Get from './classes/getter';
-import { sha256 } from 'crypto-hash';
 import { redirect } from 'next/navigation';
 
 const SECRET = process.env.SECRET as string;
@@ -22,24 +23,25 @@ export async function login({
   if (!Validation.password(password))
     return { response: 'Usuario o contraseña incorrecta', status: 400 };
 
-  const validUser: string = Validation.username(username);
-
   try {
-    const auth = await db.login(username, password);
-    console.log(auth);
+    const {
+      user: { id: value },
+      session,
+    } = (await Login(username, password)) as {
+      user: { id: string };
+      session: Session;
+    };
+    if (!session)
+      return { response: 'Usuario o contraseña incorrecta', status: 400 };
 
-    const pwd: string = await sha256(password);
     const user = (
       await db.select('users', '*', {
-        column: 'email',
-        value: validUser,
+        column: 'auth_id',
+        value,
       })
     )[0] as Database.User;
 
     const { password: userPwd, recent_viewed, ...data } = user;
-
-    if (pwd !== userPwd)
-      return { response: 'Usuario o contraseña incorrecta', status: 400 };
 
     const userId: string = Cookies.jwt(data, SECRET, 86_400);
     const recentViewed: string = Cookies.jwt(
@@ -62,6 +64,7 @@ export async function logout() {
   Cookies.delete(USERS);
   Cookies.delete(STATUS);
   Cookies.delete(RECENT);
+  await Logout();
   redirect('/login');
 }
 

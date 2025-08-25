@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Footers, Menu } from 'jabb-astro-components';
 import jabb from '../../settings/jabb.config';
 import { login } from '../../settings/json/menus';
+import Session from '../dashboard/Session';
 
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
@@ -17,7 +18,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <header id="mainHeader" className="sticky z-50">
           <Menu.Login1 {...login} />
         </header>
-        <main>{children}</main>
+        <main>
+          <Session />
+          {children}
+        </main>
         <Footers.Footer2
           companyName={jabb.company.commercialName}
           address={jabb.company.address}

@@ -2,7 +2,7 @@ import { Events } from 'jabb-astro-components';
 import Candidates from './Candidates';
 import Cookies from '@/functions/classes/cookies';
 import Get from '@/functions/classes/getter';
-import Database from '@/functions/classes/database';
+import Database from '@/functions/classes/dbClient';
 
 const USER = process.env.USER_LOGIN as string;
 const USERS = process.env.USERS as string;

@@ -24,7 +24,7 @@ export default class Cookies {
   } = {
     maxAge: 86_400,
     secure: true,
-    // httpOnly: true,
+    httpOnly: true,
     sameSite: true,
     path: '/',
   };
