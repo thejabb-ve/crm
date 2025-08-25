@@ -14,10 +14,7 @@ export default function Login() {
     setResponse(undefined);
     try {
       Events.Utils.show('loading', true);
-      await Database.login(
-        credentials.username as string,
-        credentials.password as string,
-      );
+      await Database.login(credentials.username!, credentials.password!);
 
       let result: Forms.Response = await login(credentials);
 
