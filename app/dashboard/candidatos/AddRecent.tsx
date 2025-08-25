@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { Events } from 'jabb-astro-components';
 import { updateElement, refreshRecent } from '@/functions/server';
+import Database from '@/functions/classes/dbClient';
 
 export default function AddRecent({
   id,
@@ -22,6 +23,8 @@ export default function AddRecent({
     if (found) {
       return router.push(`/dashboard/candidatos/perfil?id=${item.id}`);
     }
+    const payment = await Database.select('payment_accounts', '*');
+    console.log(payment);
 
     try {
       Events.Utils.show('loading', true);

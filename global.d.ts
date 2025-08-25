@@ -112,7 +112,7 @@ declare global {
       role: id;
       active: boolean;
       tags: string[];
-      enterprise_id: string;
+      enterprise_id: id;
       recent_viewed?: Recent[];
     }
 

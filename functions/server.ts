@@ -4,6 +4,7 @@ import { Login, Logout } from './classes/dbServer';
 import type { Session } from '@supabase/supabase-js';
 import Validation from './classes/validation';
 import Cookies from './classes/cookies';
+import Get from './classes/getter';
 import { redirect } from 'next/navigation';
 
 const SECRET = process.env.SECRET as string;
@@ -71,18 +72,19 @@ export async function validateSession() {
   if (!Cookies.has(USER_LOGIN)) return;
   if (Cookies.has(USERS) && Cookies.has(STATUS)) return;
 
-  const { enterprise_id: value } = Cookies.read(USER_LOGIN) as Database.User;
+  const rawUserData = Cookies.read(USER_LOGIN);
+  const user: Database.User = Get.userData(rawUserData as Database.User);
 
   try {
     const owners = (await db.select('users', 'id, name', {
       column: 'enterprise_id',
-      value,
+      value: user.enterprise_id as string,
     })) as Database.getOwner[];
 
     const statuses = (
       await db.select('enterprises', 'statuses', {
         column: 'id',
-        value,
+        value: user.enterprise_id as string,
         exclude: false,
       })
     )[0] as Database.getStatus;
