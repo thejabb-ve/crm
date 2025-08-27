@@ -10,7 +10,7 @@ export default async function Create() {
     rawUserData as Database.User,
   );
   return (
-    <section className="m-3 bg-white">
+    <section className="m-3 bg-transparent">
       <h1>Crear Nuevo Candidato</h1>
       <NewClient enterprise_id={enterprise_id as Database.id} id={id} />
     </section>

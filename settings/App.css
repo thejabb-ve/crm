@@ -82,11 +82,11 @@
   }
 
   .tableElement {
-    @apply h-[80px] w-screen select-none border-b px-3;
+    @apply h-[80px] w-screen select-none border-b px-3 dark:border-cyan-950;
   }
 
   .socialIcon {
-    @apply h-4 w-4 text-gray-600 transition-colors hover:text-gray-400;
+    @apply h-4 w-4 text-gray-600 transition-colors hover:text-gray-400 dark:text-white;
   }
 
   .profileContainer {

@@ -53,7 +53,7 @@ export default function AddRecent({
     <button
       onClick={addRecent}
       aria-label={`Ver perfil de ${item.name}`}
-      className="w-fit border-white transition-all hover:border-b hover:border-blue-800 hover:text-blue-800"
+      className="w-fit border-white transition-all hover:border-b hover:border-blue-800 hover:text-blue-800 dark:hover:border-gray-100 dark:hover:text-gray-100"
     >
       {`${item.name}`}
     </button>

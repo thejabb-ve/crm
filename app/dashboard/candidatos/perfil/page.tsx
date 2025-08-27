@@ -31,7 +31,7 @@ export default async function Page({
 }) {
   const { id } = searchParams;
 
-  const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
+  const rawStatusData = Cookies.read(STATUS) as Database.getEnterprise;
   const rawUserData = Cookies.read(USER) as Database.User;
 
   const statuses: Database.Status[] = rawStatusData.statuses;
@@ -64,7 +64,7 @@ export default async function Page({
   const createdBy: string = Get.filter(owners, data.owner_id).name;
 
   return (
-    <section className="m-3 bg-white">
+    <section className="m-3 bg-transparent">
       <h1>Perfil de {data.name}</h1>
       <CandidateStatus status={data.status} statuses={statuses} />
       <div className="grid w-full grid-cols-2 gap-3">

@@ -47,7 +47,7 @@ export default function Candidates({
   const month: number = fullDate.getMonth();
 
   return (
-    <section>
+    <section className="bg-transparent">
       <Search placeholder="Buscar..." defaultValue={query} />
       <Table headers={headers}>
         {data.length ? (
@@ -58,7 +58,7 @@ export default function Candidates({
             ) => (
               <tr
                 key={item.phone}
-                className="bg-white transition-colors hover:bg-blue-50"
+                className="darkContainer darkContainerHover bg-white transition-colors hover:bg-blue-50"
               >
                 <td className="tableElement">
                   <AddRecent id={userId} item={item} recent={recent} />

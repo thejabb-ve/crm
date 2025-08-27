@@ -6,7 +6,7 @@ export default function Table({
   headers: string[];
 }) {
   return (
-    <table className="relative my-5 table h-[350px] min-w-full rounded bg-gray-50 text-left shadow">
+    <table className="darkAltContainer relative my-5 table h-[350px] min-w-full rounded bg-gray-50 text-left shadow">
       <thead>
         <tr>
           {headers.map((item, index) => (

@@ -19,7 +19,7 @@ export default function Tag({
 
   return (
     <p
-      className={`${colors.config} w-fit rounded border px-2 text-xs font-bold uppercase`}
+      className={`${colors.config} darkAltContainer w-fit rounded border px-2 text-xs font-bold uppercase`}
       id={`tag-${id}`}
     >
       {colors.name}

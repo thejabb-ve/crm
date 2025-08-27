@@ -72,10 +72,10 @@ export default function Logs({
   }
 
   return (
-    <section className="profileContainer">
+    <section className="profileContainer darkContainer">
       <form action={submit} id="createLog">
         <fieldset className="grid grid-cols-2 gap-3">
-          <legend className=" col-span-2">Registros</legend>
+          <legend className="darkTitle col-span-2">Registros</legend>
           <Inputs.Select
             label={{ className: 'label', text: 'Método de Contacto' }}
             name="via"
@@ -161,9 +161,9 @@ export default function Logs({
               {logs.map((item) => (
                 <div
                   key={`key-candidate-log-${item.id}`}
-                  className="my-1 rounded bg-white p-3 shadow"
+                  className="darkAltContainer my-1 rounded bg-white p-3 shadow"
                 >
-                  <p className="mb-2 rounded bg-gray-100 p-3 font-light leading-6">
+                  <p className="darkContainer mb-2 rounded bg-gray-100 p-3 font-light leading-6">
                     {item.message}
                   </p>
                   <div className="grid grid-cols-3 gap-3">

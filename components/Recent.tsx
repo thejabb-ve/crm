@@ -41,7 +41,7 @@ export default function RecentViewed({
             key={`key-${id}-recent`}
             onMouseOver={() => {}}
             onMouseLeave={() => {}}
-            className="relative min-w-[140px] cursor-pointer select-none rounded border-2 border-gray-300 bg-gray-100 px-2 text-center transition-all hover:bg-blue-100"
+            className="darkAltContainer darkContainerHover relative min-w-[140px] cursor-pointer select-none rounded border-2 border-gray-300 bg-gray-100 px-2 text-center transition-all hover:bg-blue-100 dark:text-white"
           >
             <a
               href={`/dashboard/${type === 1 ? 'candidatos' : 'cuentas'}/perfil?id=${id}`}
@@ -51,7 +51,7 @@ export default function RecentViewed({
               {name.length > 16 ? `${name.slice(0, 15)}...` : name}
             </a>
             <span
-              className={`absolute ${true ? null : 'hidden'} right-0 h-full w-[24px] rounded bg-blue-200 bg-opacity-75 text-center font-extralight transition-colors hover:bg-blue-300 active:bg-blue-400`}
+              className={`darkContainer darkContainerHover absolute right-0 h-full w-[24px] rounded bg-gray-200 bg-opacity-75 text-center font-extralight transition-colors hover:bg-blue-300 active:bg-blue-400 dark:text-white`}
               onClick={async () => await removeRecent(id)}
             >
               x

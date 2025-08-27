@@ -77,7 +77,7 @@ export default function NewCandidate({
   return (
     <form
       action={submit}
-      className="mx-auto my-5 w-6/12 rounded bg-gray-50 p-8 shadow"
+      className="darkContainer mx-auto my-5 w-6/12 rounded bg-gray-50 p-8 shadow"
     >
       <Inputs.Text
         name="name"

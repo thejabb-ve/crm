@@ -54,7 +54,7 @@ export default async function Page({
 
   const rawUserData = Cookies.read(USER);
   const rawUsersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
-  const rawStatusData = Cookies.read(STATUS) as Database.getStatus;
+  const rawStatusData = Cookies.read(STATUS) as Database.getEnterprise;
   const rawRecent = Cookies.read(RECENT) as Database.getRecent;
 
   const user: Database.User = Get.userData(rawUserData as Database.User);

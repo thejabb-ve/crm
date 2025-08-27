@@ -85,10 +85,12 @@ export default function Profile({
   }
 
   return (
-    <section className="profileContainer">
+    <section className="profileContainer darkContainer">
       <form action={submit}>
         <fieldset className="grid grid-cols-2 gap-3">
-          <legend className="col-span-2 mb-3">Información de Contacto</legend>
+          <legend className="darkTitle col-span-2 mb-3">
+            Información de Contacto
+          </legend>
           <Inputs.Text
             name="name"
             required={true}
@@ -106,7 +108,8 @@ export default function Profile({
             className="input w-full"
           />
           <p className="mx-2 my-auto align-middle text-sm">
-            <span className="label">Propietario:</span> <span>{owner}</span>
+            <span className="label dark:text-white">Propietario:</span>{' '}
+            <span>{owner}</span>
           </p>
           <Inputs.Text
             name="phone"
@@ -173,7 +176,7 @@ export default function Profile({
           />
         </fieldset>
         <fieldset className="mt-3 grid grid-cols-3 gap-3 rounded">
-          <legend className="col-span-2 mb-3">
+          <legend className="darkTitle col-span-2 mb-3">
             Ingresos y Egresos Mensuales
           </legend>
           <Inputs.Text
@@ -217,7 +220,7 @@ export default function Profile({
             className="input w-full"
           />
           <p className="mx-2 my-auto align-middle text-sm">
-            <span className="label">Ahorro Estimado:</span>{' '}
+            <span className="label dark:text-white">Ahorro Estimado:</span>{' '}
             <span>
               ${formData.estimated_salary - formData.estimated_expenses}
             </span>

@@ -74,7 +74,7 @@ export default function Social({
             <a
               href={href}
               aria-label={ariaLabel}
-              className="h-2 w-2 text-gray-600 transition-colors hover:text-gray-400"
+              className="h-2 w-2 text-gray-600 transition-colors hover:text-gray-400 dark:text-white"
               target="_blank"
               rel="nofollow"
             >
