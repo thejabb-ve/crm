@@ -69,7 +69,7 @@ export async function logout() {
 }
 
 export async function validateSession() {
-  if (!Cookies.has(USER_LOGIN)) return;
+  if (!Cookies.has(USER_LOGIN)) return await logout();
   if (Cookies.has(USERS) && Cookies.has(STATUS)) return;
 
   const rawUserData = Cookies.read(USER_LOGIN);
@@ -80,17 +80,23 @@ export async function validateSession() {
       column: 'enterprise_id',
       value: user.enterprise_id as string,
     })) as Database.getOwner[];
-
-    const statuses = (
-      await db.select('enterprises', 'statuses', {
+    //
+    const enterprise = (
+      await db.select('enterprises', 'name, tier, statuses, roles, img', {
         column: 'id',
         value: user.enterprise_id as string,
         exclude: false,
       })
-    )[0] as Database.getStatus;
+    )[//
+    0] as Database.getEnterprise;
 
     const ownerCookie: string = Cookies.jwt({ owners }, SECRET, 86_400);
-    const statusCookie: string = Cookies.jwt(statuses, SECRET, 86_400);
+    //
+    const statusCookie: string = Cookies.jwt(
+      { statuses: enterprise.statuses },
+      SECRET,
+      86_400,
+    );
 
     Cookies.set(USERS, ownerCookie);
     Cookies.set(STATUS, statusCookie);

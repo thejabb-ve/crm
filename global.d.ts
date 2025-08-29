@@ -82,7 +82,8 @@ declare global {
       payment_account?: id;
       statuses: Database.Status[];
       roles: Database.Role[];
-      // user: id;
+      admin_id: id;
+      img?: string;
     }
 
     interface Account extends Candidate {
@@ -138,9 +139,13 @@ declare global {
       type: number;
     }
 
-    interface getStatus {
+    interface getEnterprise {
       id?: string;
+      name: string;
+      tier: number;
       statuses: Status[];
+      roles: Role[];
+      img?: string;
     }
 
     interface getRecent {
@@ -154,7 +159,7 @@ declare global {
       | Database.Logs[]
       | Database.Enterprise[]
       | Database.Account[]
-      | Database.getStatus[];
+      | Database.getEnterprise[];
 
     type Select = (
       table: string,
