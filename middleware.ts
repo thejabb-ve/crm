@@ -1,14 +1,19 @@
 'use server';
 import { NextResponse, type NextRequest } from 'next/server';
-import { updateSession } from './functions/classes/dbServer';
+import { updateSession, Logout } from './functions/classes/dbServer';
+import { cookies } from 'next/headers';
+const USER_LOGIN = process.env.USER_LOGIN as string;
 // import { PROTECTED_ROUTES } from '@/settings/json/config';
 
 export async function middleware(request: NextRequest, response: NextResponse) {
   const user = await updateSession();
   const pathname: string = request.nextUrl.pathname;
+  const session = cookies().has(USER_LOGIN);
   // const isProtected = PROTECTED_ROUTES.some((path) =>
   //   pathname.startsWith(path),
   // );
+
+  if (!session) await Logout();
 
   if (!user && pathname !== '/login') {
     const url = request.nextUrl.clone();
