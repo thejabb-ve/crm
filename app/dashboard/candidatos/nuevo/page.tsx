@@ -5,7 +5,7 @@ import Get from '@/functions/classes/getter';
 const USER_LOGIN = process.env.USER_LOGIN as string;
 
 export default async function Create() {
-  const rawUserData = Cookies.read(USER_LOGIN);
+  const rawUserData = await Cookies.read(USER_LOGIN);
   const { enterprise_id, id }: Database.User = Get.userData(
     rawUserData as Database.User,
   );

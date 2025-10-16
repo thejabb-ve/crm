@@ -14,8 +14,8 @@
     "@nextui-org/react": "^2.2.9",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.46.1",
-    "jabb-astro-components": "^2.6.5",
-    "jsonwebtoken": "^9.0.2",
+    "jabb-astro-components": "^2.7.3",
+    "jose": "^6.1.0",
     "nanoid": "^5.0.5",
     "next": "^14.0.2",
     "nodemailer": "^6.9.13",
@@ -25,7 +25,6 @@
     "use-debounce": "^10.0.4"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "20.5.7",
     "@types/nodemailer": "^6.4.15",
     "@types/react": "18.2.21",

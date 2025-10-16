@@ -6,6 +6,7 @@ import Validation from './classes/validation';
 import Cookies from './classes/cookies';
 import Get from './classes/getter';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 const SECRET = process.env.SECRET as string;
 const USER_LOGIN = process.env.USER_LOGIN as string;
@@ -43,11 +44,11 @@ export async function login({
 
     const { password: userPwd, recent_viewed, ...data } = user;
 
-    const userId: string = Cookies.jwt(data, SECRET, 86_400);
-    const recentViewed: string = Cookies.jwt(
-      { recent_viewed: recent_viewed as Database.Recent[] },
+    const userId: string = await Cookies.jwt(data, SECRET, '72h');
+    const recentViewed: string = await Cookies.jwt(
+      { recent_viewed },
       SECRET,
-      86_400,
+      '72h',
     );
 
     Cookies.set(USER_LOGIN, userId);
@@ -69,10 +70,11 @@ export async function logout() {
 }
 
 export async function validateSession() {
-  if (!Cookies.has(USER_LOGIN)) return await logout();
-  if (Cookies.has(USERS) && Cookies.has(STATUS)) return;
+  if (!cookies().has(USER_LOGIN)) return await logout();
+  if (cookies().has(USERS) && cookies().has(STATUS)) return;
 
-  const rawUserData = Cookies.read(USER_LOGIN);
+  const cookieUser = cookies().get(USER_LOGIN);
+  const rawUserData = await Cookies.read(cookieUser);
   const user: Database.User = Get.userData(rawUserData as Database.User);
 
   try {
@@ -89,11 +91,11 @@ export async function validateSession() {
       })
     )[0] as Database.getEnterprise;
 
-    const ownerCookie: string = Cookies.jwt({ owners }, SECRET, 86_400);
-    const statusCookie: string = Cookies.jwt(
+    const ownerCookie: string = await Cookies.jwt({ owners }, SECRET, '72h');
+    const statusCookie: string = await Cookies.jwt(
       { statuses: enterprise.statuses },
       SECRET,
-      86_400,
+      '72h',
     );
 
     Cookies.set(USERS, ownerCookie);
@@ -170,6 +172,6 @@ export async function updateStatus(
 
 export async function refreshRecent(query: Cookies.Data) {
   Cookies.delete(RECENT);
-  const data: string = Cookies.jwt(query, SECRET, 86_400);
+  const data: string = await Cookies.jwt(query, SECRET, '72h');
   Cookies.set(RECENT, data);
 }

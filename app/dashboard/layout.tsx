@@ -10,6 +10,7 @@ import { logout } from '@/functions/server';
 import ValidateSession from './Session';
 import '../../settings/App.css';
 import 'jabb-astro-components/Dark.css';
+import { cookies } from 'next/headers';
 
 const RECENT = process.env.RECENT as string;
 const USER = process.env.USER_LOGIN as string;
@@ -18,9 +19,16 @@ export const metadata: Metadata = {
   icons: { icon: 'https://cdn.thejabb.com/logo/favicon.png' },
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const rawRecent = Cookies.read(RECENT) as Database.getRecent;
-  const rawUser = Cookies.read(USER) as Database.User;
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const cookieRecent = cookies().get(RECENT);
+  const cookieUser = cookies().get(USER);
+
+  const rawRecent = (await Cookies.read(cookieRecent)) as Database.getRecent;
+  const rawUser = (await Cookies.read(cookieUser)) as Database.User;
 
   const recent: Database.Recent[] = rawRecent.recent_viewed;
   const user: Database.User = Get.userData(rawUser as Database.User);

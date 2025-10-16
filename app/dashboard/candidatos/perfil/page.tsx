@@ -31,8 +31,8 @@ export default async function Page({
 }) {
   const { id } = searchParams;
 
-  const rawStatusData = Cookies.read(STATUS) as Database.getEnterprise;
-  const rawUserData = Cookies.read(USER) as Database.User;
+  const rawStatusData = (await Cookies.read(STATUS)) as Database.getEnterprise;
+  const rawUserData = (await Cookies.read(USER)) as Database.User;
 
   const statuses: Database.Status[] = rawStatusData.statuses;
   const user: Database.User = Get.userData(rawUserData as Database.User);
@@ -59,7 +59,9 @@ export default async function Page({
       </section>
     );
 
-  const rawOwnersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
+  const rawOwnersData = (await Cookies.read(USERS)) as {
+    owners: Database.getOwner[];
+  };
   const owners = rawOwnersData.owners;
   const createdBy: string = Get.filter(owners, data.owner_id).name;
 

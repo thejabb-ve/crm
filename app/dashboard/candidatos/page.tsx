@@ -52,10 +52,12 @@ export default async function Page({
 }) {
   const { query } = searchParams;
 
-  const rawUserData = Cookies.read(USER);
-  const rawUsersData = Cookies.read(USERS) as { owners: Database.getOwner[] };
-  const rawStatusData = Cookies.read(STATUS) as Database.getEnterprise;
-  const rawRecent = Cookies.read(RECENT) as Database.getRecent;
+  const rawUserData = await Cookies.read(USER);
+  const rawUsersData = (await Cookies.read(USERS)) as {
+    owners: Database.getOwner[];
+  };
+  const rawStatusData = (await Cookies.read(STATUS)) as Database.getEnterprise;
+  const rawRecent = (await Cookies.read(RECENT)) as Database.getRecent;
 
   const user: Database.User = Get.userData(rawUserData as Database.User);
   const accounts = (await Database.select('accounts', '*', {
