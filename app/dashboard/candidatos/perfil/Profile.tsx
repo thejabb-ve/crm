@@ -33,7 +33,7 @@ export default function Profile({
     phone,
     instagram,
     birthday,
-    enterprise_id,
+    // enterprise_id,
     estimated_salary = 0,
     estimated_expenses = 0,
   } = data;
