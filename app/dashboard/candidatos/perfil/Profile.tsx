@@ -176,7 +176,7 @@ export default function Profile({
             className="input w-full"
           />
         </fieldset>
-        {enterprise_id !== '52373751-53a8-4db5-8dbf-4c686d444620' && (
+        {false /*enterprise_id !== '52373751-53a8-4db5-8dbf-4c686d444620'*/ && (
           <fieldset className="mt-3 grid grid-cols-3 gap-3 rounded">
             <legend className="darkTitle col-span-2 mb-3">
               Ingresos y Egresos Mensuales
