@@ -55,7 +55,8 @@ export async function login({
     Cookies.set(RECENT, recentViewed);
 
     return { response: 'Sesión iniciada', status: 200 };
-  } catch {
+  } catch (err) {
+    console.log(err);
     return { response: 'Ocurrió un error, intente nuevamente', status: 500 };
   }
 }
