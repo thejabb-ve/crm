@@ -33,6 +33,7 @@ export default function Profile({
     phone,
     instagram,
     birthday,
+    enterprise_id,
     estimated_salary = 0,
     estimated_expenses = 0,
   } = data;
@@ -175,57 +176,59 @@ export default function Profile({
             className="input w-full"
           />
         </fieldset>
-        <fieldset className="mt-3 grid grid-cols-3 gap-3 rounded">
-          <legend className="darkTitle col-span-2 mb-3">
-            Ingresos y Egresos Mensuales
-          </legend>
-          <Inputs.Text
-            name="estimated_salary"
-            required={false}
-            label={{ text: 'Ingreso Estimado', className: 'label' }}
-            defaultValue={
-              formData.estimated_salary
-                ? formData.estimated_salary.toString()
-                : '0'
-            }
-            placeholder="0"
-            onChange={(e) =>
-              Events.Forms.handleInput(
-                e.target.value,
-                'estimated_salary',
-                formData,
-                setFormData,
-              )
-            }
-            className="input w-full"
-          />
-          <Inputs.Text
-            name="estimated_expenses"
-            required={false}
-            label={{ text: 'Gasto Estimado', className: 'label' }}
-            defaultValue={
-              formData.estimated_expenses
-                ? formData.estimated_expenses.toString()
-                : '0'
-            }
-            placeholder="0"
-            onChange={(e) =>
-              Events.Forms.handleInput(
-                e.target.value,
-                'estimated_expenses',
-                formData,
-                setFormData,
-              )
-            }
-            className="input w-full"
-          />
-          <p className="mx-2 my-auto align-middle text-sm">
-            <span className="label dark:text-white">Ahorro Estimado:</span>{' '}
-            <span>
-              ${formData.estimated_salary - formData.estimated_expenses}
-            </span>
-          </p>
-        </fieldset>
+        {enterprise_id !== '52373751-53a8-4db5-8dbf-4c686d444620' && (
+          <fieldset className="mt-3 grid grid-cols-3 gap-3 rounded">
+            <legend className="darkTitle col-span-2 mb-3">
+              Ingresos y Egresos Mensuales
+            </legend>
+            <Inputs.Text
+              name="estimated_salary"
+              required={false}
+              label={{ text: 'Ingreso Estimado', className: 'label' }}
+              defaultValue={
+                formData.estimated_salary
+                  ? formData.estimated_salary.toString()
+                  : '0'
+              }
+              placeholder="0"
+              onChange={(e) =>
+                Events.Forms.handleInput(
+                  e.target.value,
+                  'estimated_salary',
+                  formData,
+                  setFormData,
+                )
+              }
+              className="input w-full"
+            />
+            <Inputs.Text
+              name="estimated_expenses"
+              required={false}
+              label={{ text: 'Gasto Estimado', className: 'label' }}
+              defaultValue={
+                formData.estimated_expenses
+                  ? formData.estimated_expenses.toString()
+                  : '0'
+              }
+              placeholder="0"
+              onChange={(e) =>
+                Events.Forms.handleInput(
+                  e.target.value,
+                  'estimated_expenses',
+                  formData,
+                  setFormData,
+                )
+              }
+              className="input w-full"
+            />
+            <p className="mx-2 my-auto align-middle text-sm">
+              <span className="label dark:text-white">Ahorro Estimado:</span>{' '}
+              <span>
+                ${formData.estimated_salary - formData.estimated_expenses}
+              </span>
+            </p>
+          </fieldset>
+        )}
         <TwoButtons {...twoButtons} />
         {response && (
           <p
